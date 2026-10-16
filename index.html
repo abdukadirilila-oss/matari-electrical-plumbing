@@ -3,67 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MATARI ELECTRICAL AND PLUMBING - matali electrical & plumb</title>
+<title>MATARI ELECTRICAL AND PLUMBING</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#020a1e;color:#fff;overflow-x:hidden}
-@keyframes glow{0%,100%{text-shadow:0 0 20px #ffcc00,0 0 40px #ffcc00,0 0 80px #ff9500}50%{text-shadow:0 0 30px #ffcc00,0 0 60px #ffcc00,0 0 120px #ff9500}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-@keyframes pulseBtn{0%,100%{box-shadow:0 0 20px rgba(255,204,0,.6),0 0 40px rgba(255,149,0,.4)}50%{box-shadow:0 0 35px rgba(255,204,0,.9),0 0 70px rgba(255,149,0,.6)}}
-.landing{height:100vh;background:radial-gradient(1200px at 50% -10%,#0b2e6b 0%,#020a1e 55%,#000312 100%);display:flex;flex-direction:column;position:relative}
-.header{padding:16px 30px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,10,40,.6);border-bottom:1px solid rgba(255,255,255,.08)}
-.logo{font-weight:900}.logo span{color:#ffcc00}
-.login-btn{background:linear-gradient(90deg,#ffcc00,#ff9500);color:#000;padding:10px 22px;border-radius:25px;font-weight:800;border:none;cursor:pointer}
-.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.matari-title{font-size:72px;font-weight:900;color:#ffcc00;animation:glow 2.5s infinite, float 4s infinite}
-.sub{letter-spacing:8px;font-size:16px;font-weight:800;margin-top:8px}
-.mkoa{margin-top:12px;font-size:14px;opacity:.6}
-.ingia{margin-top:28px;background:linear-gradient(90deg,#ffcc00,#ff9500);color:#000;padding:16px 38px;border-radius:30px;font-weight:900;border:none;cursor:pointer;animation:pulseBtn 2s infinite}
-.wa{margin-top:18px;font-size:12px;opacity:.5}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(15px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070d1f;font-family:Arial,sans-serif;overflow:hidden;height:100vh}
+.topbar{height:56px;background:linear-gradient(90deg,#0a1931 0%,#102a5a 50%,#0a1931 100%);display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid rgba(255,204,0,.15)}
+.top-left{font-weight:900;font-size:14px;color:#fff}.top-left span{color:#ffcc00}
+.login{background:linear-gradient(90deg,#ffb800,#ff8c00);color:#000;font-weight:900;font-size:13px;padding:9px 24px;border-radius:20px;border:none;cursor:pointer;box-shadow:0 0 15px rgba(255,184,0,.6)}
+.main{height:calc(100vh - 56px);background:radial-gradient(ellipse 900px 500px at 50% 20%,#132a5c 0%,#0a1430 40%,#050a1a 75%,#020510 100%);display:flex;align-items:center;justify-content:center}
+.center-box{text-align:center;transform:translateY(-20px)}
+.matari{font-size:68px;font-weight:900;color:#ffcc00;letter-spacing:3px;line-height:1;text-shadow:0 0 10px #ffcc00,0 0 20px #ffcc00,0 0 40px #ff9500,0 0 80px #ff6a00;animation:glowPulse 2.2s infinite, floatY 4s infinite}
+.elec{margin-top:12px;font-size:15px;font-weight:800;letter-spacing:7px;color:#e8efff;text-transform:uppercase}
+.mkoa{margin-top:14px;font-size:14px;color:#8a9bb5}
+.ingia-btn{background:linear-gradient(90deg,#ffb800,#ff9500);color:#1a0f00;font-weight:900;font-size:14px;padding:14px 36px;border-radius:28px;border:none;cursor:pointer;box-shadow:0 0 20px rgba(255,184,0,.5);animation:btnPulse 2s infinite}
+.wa-text{margin-top:16px;font-size:11px;color:#5a6a85}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 10px #ffcc00,0 0 20px #ffcc00,0 0 40px #ff9500,0 0 80px #ff6a00;transform:scale(1)}50%{text-shadow:0 0 15px #ffcc00,0 0 35px #ffcc00,0 0 70px #ff9500,0 0 120px #ff6a00;transform:scale(1.03)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 20px rgba(255,184,0,.5)}50%{box-shadow:0 0 30px rgba(255,184,0,.8),0 0 70px rgba(255,140,0,.5)}}
+.modal{position:fixed;inset:0;background:rgba(2,5,16,.9);backdrop-filter:blur(18px);display:none;align-items:center;justify-content:center;z-index:999;padding:20px}
 .modal.active{display:flex}
-.role-box{background:linear-gradient(180deg,#0b1a3d,#020a1e);border:1px solid rgba(255,204,0,.2);border-radius:28px;padding:35px;max-width:520px;width:100%;text-align:center}
-.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
-.role-card{background:#ffffff08;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px;cursor:pointer}
-.role-card:hover{border-color:#ffcc00;transform:translateY(-6px)}
-.role-card h3{color:#ffcc00;margin-top:10px}
-.portal{display:none;min-height:100vh;background:#f6f8ff;color:#0f172a}
+.box{background:linear-gradient(180deg,#0f234d,#070d1f);border:1px solid rgba(255,204,0,.25);border-radius:26px;padding:32px;max-width:520px;width:100%;text-align:center}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.role{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:18px;padding:22px;cursor:pointer}
+.role:hover{border-color:#ffcc00;transform:translateY(-5px)}
+.role h3{color:#ffcc00;margin-top:8px}
+.portal{display:none;height:100vh;overflow:auto;background:#f5f7fb;color:#0f172a}
 .portal.active{display:block}
-.portal-header{background:#001a4d;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
-.services{padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:1200px;margin:0 auto}
-.s-card{background:#fff;border-radius:22px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
-.s-card button{background:#001a4d;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:800;cursor:pointer;margin-top:10px;width:100%}
-.cart{position:fixed;bottom:20px;right:20px;background:linear-gradient(90deg,#001a4d,#0b4bff);color:#fff;padding:14px 22px;border-radius:30px;font-weight:800;cursor:pointer;z-index:200}
-.cart span{background:#ffcc00;color:#000;border-radius:50%;padding:2px 8px;margin-left:8px}
-.boss-login{max-width:400px;margin:80px auto;background:#fff;padding:30px;border-radius:24px}
-.boss-login input{width:100%;padding:12px;border-radius:12px;border:1px solid #e2e8f0;margin:8px 0}
-.order{background:#fff;padding:16px;border-radius:16px;margin:10px 0;border-left:4px solid #ffcc00}
+.p-header{background:#0a1931;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.grid{padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;max-width:1200px;margin:0 auto}
+.card{background:#fff;border-radius:20px;padding:18px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
+.card button{width:100%;margin-top:10px;background:#0a1931;color:#fff;border:none;padding:10px;border-radius:16px;font-weight:800;cursor:pointer}
+.cart{position:fixed;bottom:20px;right:20px;background:#0a1931;color:#fff;padding:12px 20px;border-radius:30px;font-weight:800;cursor:pointer}
+.cart b{background:#ffcc00;color:#000;border-radius:50%;padding:2px 8px;margin-left:6px}
 </style>
 </head>
 <body>
-<div class="landing" id="landing">
-<div class="header"><div class="logo">MATARI <span>ELECTRICAL AND PLUMBING</span></div><button class="login-btn" onclick="openRoles()">LOGIN</button></div>
-<div class="center"><div class="matari-title">MATARI</div><div class="sub">ELECTRICAL AND PLUMBING</div><div class="mkoa">Mkoa • Wilaya • Kata • Mtaa - Tunakufikia popote</div><button class="ingia" onclick="openRoles()">INGIA SASA ✨</button><div class="wa">WhatsApp: 0787571967</div></div>
-</div>
-<div class="modal" id="roleModal"><div class="role-box"><h2>Karibu MATARI</h2><p style="opacity:.7">Chagua utakavyoingia</p><div class="role-grid"><div class="role-card" onclick="enterCustomer()"><div style="font-size:40px">👤</div><h3>MTEJA</h3><p style="font-size:12px;opacity:.6">Angalia huduma zote</p></div><div class="role-card" onclick="enterBoss()"><div style="font-size:40px">👑</div><h3>BOSS</h3><p style="font-size:12px;opacity:.6">Msimamizi</p></div></div><button onclick="closeRoles()" style="margin-top:20px;background:transparent;color:#fff;border:1px solid #fff;padding:8px 18px;border-radius:20px;cursor:pointer">Funga</button></div></div>
-<div class="portal" id="customerPortal"><div class="portal-header"><div><b>MATARI</b> - Mteja</div><button onclick="backToHome()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:8px 14px;border-radius:20px;cursor:pointer">🏠 Nyumbani</button></div><div style="background:#001a4d;color:#fff;padding:18px;text-align:center"><h2>Huduma Zote - Chagua</h2></div><div class="services" id="serviceGrid"></div><div class="cart" id="cartBtn" onclick="openCheckout()">🛒 Cart <span id="cartCount">0</span></div></div>
-<div class="modal" id="checkoutModal"><div class="role-box" style="background:#fff;color:#0f172a;text-align:left;max-width:480px"><h3>Malizia Order</h3><div id="checkoutList" style="margin:14px 0"></div><input id="cName" placeholder="Jina lako" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:6px 0"><input id="cPhone" placeholder="Simu 07..." style="width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:6px 0"><select id="cMkoa" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:6px 0"><option value="">Chagua Mkoa</option><option>Dar es Salaam</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option><option>Mbeya</option><option>Morogoro</option><option>Tanga</option><option>Kilimanjaro</option><option>Zanzibar</option><option>Mingine</option></select><input id="cWilaya" placeholder="Wilaya" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:6px 0"><input id="cKata" placeholder="Kata" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:6px 0"><input id="cMtaa" placeholder="Mtaa" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:6px 0"><button onclick="submitOrder()" style="width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:14px;font-weight:900;margin-top:10px">📲 Tuma WhatsApp</button><button onclick="closeCheckout()" style="width:100%;background:#f1f5f9;border:none;padding:10px;border-radius:12px;margin-top:8px">Funga</button></div></div>
-<div class="portal" id="bossPortal"><div class="portal-header"><div><b>MATARI BOSS</b></div><button onclick="backToHome()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:8px 14px;border-radius:20px">🏠 Toka</button></div><div id="bossLoginBox"><div class="boss-login"><h3>Boss Login</h3><input id="bossPass" type="password" placeholder="Password: matari2026"><button onclick="bossLogin()" style="width:100%;background:#001a4d;color:#fff;border:none;padding:12px;border-radius:12px;font-weight:800;margin-top:10px">Ingia</button></div></div><div id="bossDash" style="display:none"><div style="padding:20px;max-width:900px;margin:0 auto"><h2>Orders za Wateja</h2><div id="ordersList" style="margin-top:16px"></div></div></div></div>
+<div class="topbar"><div class="top-left">MATARI <span>ELECTRICAL AND PLUMBING</span></div><button class="login" onclick="openModal()">LOGIN</button></div>
+<div class="main"><div class="center-box"><div class="matari">MATARI</div><div class="elec">ELECTRICAL AND PLUMBING</div><div class="mkoa">Mkoa • Wilaya • Kata • Mtaa - Tunakufikia popote</div><div style="margin-top:28px"><button class="ingia-btn" onclick="openModal()">INGIA SASA ✨</button></div><div class="wa-text">WhatsApp: 0787571967</div></div></div>
+
+<div class="modal" id="roleModal"><div class="box"><h2 style="font-size:26px;font-weight:900;color:#fff">Karibu MATARI</h2><p style="color:#8a9bb5;margin-top:6px">Chagua MTEJA au BOSS</p><div class="roles"><div class="role" onclick="goCustomer()"><div style="font-size:36px">👤</div><h3>MTEJA</h3><p style="font-size:11px;color:#8a9bb5">Huduma zote - chagua</p></div><div class="role" onclick="goBoss()"><div style="font-size:36px">👑</div><h3>BOSS</h3><p style="font-size:11px;color:#8a9bb5">Ona orders</p></div></div><button onclick="closeModal()" style="margin-top:18px;background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 18px;border-radius:20px;cursor:pointer">Funga</button></div></div>
+
+<div class="portal" id="customer"><div class="p-header"><div><b>MATARI</b> - Mteja</div><button onclick="home()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 14px;border-radius:18px">🏠 Nyumbani</button></div><div style="background:#0a1931;color:#fff;padding:16px;text-align:center"><h3>Huduma Zote - Mteja Achagua</h3><p style="font-size:12px;opacity:.6">Chagua bidhaa - kisha weka Mkoa/Wilaya/Kata/Mtaa - Tuma kwa Boss</p></div><div class="grid" id="grid"></div><div class="cart" onclick="checkout()">🛒 Cart <b id="count">0</b></div></div>
+
+<div class="modal" id="checkModal"><div class="box" style="background:#fff;color:#0f172a;text-align:left;max-width:460px"><h3>Malizia Order</h3><div id="list" style="margin:12px 0"></div><input id="jina" placeholder="Jina" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0"><input id="simu" placeholder="Simu" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0"><select id="mkoaS" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0"><option value="">Chagua Mkoa</option><option>Dar es Salaam</option><option>Arusha</option><option>Mwanza</option><option>Zanzibar</option><option>Mingine</option></select><input id="wilaya" placeholder="Wilaya" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0"><input id="kata" placeholder="Kata" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0"><input id="mtaa" placeholder="Mtaa" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:5px 0"><button onclick="tuma()" style="width:100%;background:#25D366;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:900;margin-top:8px">📲 Tuma WhatsApp kwa Boss</button><button onclick="closeCheck()" style="width:100%;background:#f1f5f9;border:none;padding:10px;border-radius:10px;margin-top:6px">Funga</button></div></div>
+
+<div class="portal" id="boss"><div class="p-header"><div><b>MATARI BOSS</b></div><button onclick="home()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 14px;border-radius:18px">🏠 Toka</button></div><div id="bossLogin" style="max-width:380px;margin:60px auto;background:#fff;padding:26px;border-radius:20px"><h3>Boss Login</h3><input id="pass" type="password" placeholder="matari2026" style="width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin:8px 0"><button onclick="loginBoss()" style="width:100%;background:#0a1931;color:#fff;border:none;padding:11px;border-radius:10px;font-weight:800">Ingia</button></div><div id="bossDash" style="display:none;padding:20px;max-width:900px;margin:0 auto"><h3>Orders za Wateja</h3><div id="orders" style="margin-top:14px"></div></div></div>
+
 <script>
-const services=[{id:1,name:'AC Installation',price:'70,000',desc:'Kufunga AC mpya',icon:'❄️'},{id:2,name:'AC Repair',price:'50,000',desc:'Kutengeneza AC',icon:'🔧'},{id:3,name:'CCTV 4 Cameras',price:'450,000',desc:'DVR + Phone View',icon:'📹'},{id:4,name:'Wiring Nyumba',price:'150k+',desc:'Wiring kisasa',icon:'🔌'},{id:5,name:'Plumbing',price:'30k+',desc:'Mabomba',icon:'🚿'},{id:6,name:'Dish Azam/DSTV',price:'30,000',desc:'Signal 100%',icon:'📡'},{id:7,name:'Solar System',price:'Bei Nafuu',desc:'Umeme wa jua',icon:'☀️'},{id:8,name:'Electrical Repair',price:'20k+',desc:'Short, socket',icon:'⚡'}];
+const services=[{id:1,n:'AC Installation',p:'70,000',d:'Kufunga AC',i:'❄️'},{id:2,n:'AC Repair',p:'50,000',d:'Kutengeneza',i:'🔧'},{id:3,n:'CCTV 4 Cameras',p:'450,000',d:'DVR + Phone',i:'📹'},{id:4,n:'Wiring Nyumba',p:'150k+',d:'Wiring kisasa',i:'🔌'},{id:5,n:'Plumbing',p:'30k+',d:'Mabomba',i:'🚿'},{id:6,n:'Dish Azam/DSTV',p:'30,000',d:'Signal 100%',i:'📡'},{id:7,n:'Solar System',p:'Bei Nafuu',d:'Umeme wa jua',i:'☀️'},{id:8,n:'Electrical Repair',p:'20k+',d:'Short',i:'⚡'}];
 let cart=[];
-function openRoles(){document.getElementById('roleModal').classList.add('active')}
-function closeRoles(){document.getElementById('roleModal').classList.remove('active')}
-function enterCustomer(){closeRoles();document.getElementById('landing').style.display='none';document.getElementById('customerPortal').classList.add('active');renderServices();}
-function enterBoss(){closeRoles();document.getElementById('landing').style.display='none';document.getElementById('bossPortal').classList.add('active');}
-function backToHome(){document.querySelectorAll('.portal').forEach(p=>p.classList.remove('active'));document.getElementById('landing').style.display='flex';closeRoles();closeCheckout();}
-function renderServices(){const g=document.getElementById('serviceGrid');g.innerHTML=services.map(s=>`<div class=s-card><div style="font-size:36px">${s.icon}</div><h3>${s.name}</h3><p style="font-size:13px;color:#64748b;margin:6px 0">${s.desc}</p><div style="font-weight:900">${s.price}/=</div><button onclick="addToCart(${s.id})">Chagua</button></div>`).join('');}
-function addToCart(id){cart.push(services.find(x=>x.id===id));document.getElementById('cartCount').innerText=cart.length;}
-function openCheckout(){if(cart.length===0){alert('Chagua huduma kwanza!');return}document.getElementById('checkoutModal').classList.add('active');document.getElementById('checkoutList').innerHTML=cart.map(c=>`<div style="background:#f8fafc;padding:8px;border-radius:10px;margin:4px 0;display:flex;justify-content:space-between"><span>${c.icon} ${c.name}</span><b>${c.price}</b></div>`).join('');}
-function closeCheckout(){document.getElementById('checkoutModal').classList.remove('active')}
-function submitOrder(){const name=document.getElementById('cName').value;const phone=document.getElementById('cPhone').value;const mkoa=document.getElementById('cMkoa').value;const wilaya=document.getElementById('cWilaya').value;const kata=document.getElementById('cKata').value;const mtaa=document.getElementById('cMtaa').value;if(!name||!phone||!mkoa){alert('Jaza jina, simu na mkoa!');return}const orderText=cart.map(c=>`• ${c.name} - ${c.price}/=`).join('%0A');const msg=`Habari MATARI%0AJina: ${name}%0ASimu: ${phone}%0AMkoa: ${mkoa}%0AWilaya: ${wilaya}%0AKata: ${kata}%0AMtaa: ${mtaa}%0A%0AHuduma:%0A${orderText}`;const orders=JSON.parse(localStorage.getItem('matari_orders')||'[]');orders.push({name,phone,mkoa,wilaya,kata,mtaa,items:cart,time:new Date().toLocaleString()});localStorage.setItem('matari_orders',JSON.stringify(orders));window.open(`https://wa.me/255787571967?text=${msg}`,'_blank');cart=[];document.getElementById('cartCount').innerText='0';closeCheckout();alert('Order imetumwa!');}
-function bossLogin(){const p=document.getElementById('bossPass').value;if(p==='matari2026'||p==='0787571967'||p==='1234'){document.getElementById('bossLoginBox').style.display='none';document.getElementById('bossDash').style.display='block';renderOrders();}else alert('Password: matari2026');}
-function renderOrders(){const orders=JSON.parse(localStorage.getItem('matari_orders')||'[]');const list=document.getElementById('ordersList');if(orders.length===0){list.innerHTML='<p>No orders</p>';return}list.innerHTML=orders.reverse().map(o=>`<div class=order><b>${o.name}</b> - ${o.phone} - ${o.mkoa}<br><small>${o.time}</small><br>${o.items.map(it=>it.name).join(', ')}</div>`).join('');}
+function openModal(){document.getElementById('roleModal').classList.add('active')}
+function closeModal(){document.getElementById('roleModal').classList.remove('active')}
+function goCustomer(){closeModal();document.querySelector('.main').style.display='none';document.querySelector('.topbar').style.display='none';document.getElementById('customer').classList.add('active');render();}
+function goBoss(){closeModal();document.querySelector('.main').style.display='none';document.querySelector('.topbar').style.display='none';document.getElementById('boss').classList.add('active');}
+function home(){document.querySelectorAll('.portal').forEach(p=>p.classList.remove('active'));document.querySelector('.main').style.display='flex';document.querySelector('.topbar').style.display='flex';closeModal();closeCheck();}
+function render(){document.getElementById('grid').innerHTML=services.map(s=>`<div class=card><div style="font-size:32px">${s.i}</div><h3>${s.n}</h3><p style="font-size:12px;color:#64748b">${s.d}</p><div style="font-weight:900">${s.p}/=</div><button onclick="add(${s.id})">Chagua</button></div>`).join('')}
+function add(id){cart.push(services.find(s=>s.id===id));document.getElementById('count').innerText=cart.length}
+function checkout(){if(!cart.length){alert('Chagua kwanza');return}document.getElementById('checkModal').classList.add('active');document.getElementById('list').innerHTML=cart.map(c=>`<div style="background:#f8fafc;padding:6px 10px;border-radius:8px;margin:3px 0;display:flex;justify-content:space-between"><span>${c.i} ${c.n}</span><b>${c.p}</b></div>`).join('')}
+function closeCheck(){document.getElementById('checkModal').classList.remove('active')}
+function tuma(){const j=document.getElementById('jina').value,s=document.getElementById('simu').value,m=document.getElementById('mkoaS').value,w=document.getElementById('wilaya').value,k=document.getElementById('kata').value,t=document.getElementById('mtaa').value;if(!j||!s||!m){alert('Jaza jina, simu, mkoa');return}const txt=cart.map(c=>`• ${c.n} - ${c.p}/=`).join('%0A');const msg=`Habari MATARI%0AJina: ${j}%0ASimu: ${s}%0AMkoa: ${m}%0AWilaya: ${w}%0AKata: ${k}%0AMtaa: ${t}%0A%0AHuduma:%0A${txt}`;const o=JSON.parse(localStorage.getItem('matari_orders')||'[]');o.push({j,s,m,w,k,t,items:cart,time:new Date().toLocaleString()});localStorage.setItem('matari_orders',JSON.stringify(o));window.open(`https://wa.me/255787571967?text=${msg}`,'_blank');cart=[];document.getElementById('count').innerText=0;closeCheck();alert('Imetumwa!')}
+function loginBoss(){const p=document.getElementById('pass').value;if(p==='matari2026'||p==='0787571967'||p==='1234'){document.getElementById('bossLogin').style.display='none';document.getElementById('bossDash').style.display='block';showOrders()}else alert('Password: matari2026')}
+function showOrders(){const o=JSON.parse(localStorage.getItem('matari_orders')||'[]');const d=document.getElementById('orders');if(!o.length){d.innerHTML='<p>No orders</p>';return}d.innerHTML=o.reverse().map(x=>`<div style="background:#fff;padding:12px;border-radius:12px;margin:8px 0;border-left:4px solid #ffcc00"><b>${x.j}</b> - ${x.s} - ${x.m}<br><small>${x.time}</small><br>${x.items.map(i=>i.n).join(', ')}</div>`).join('')}
 </script>
 </body>
 </html>
