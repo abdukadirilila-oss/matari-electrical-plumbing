@@ -6,288 +6,316 @@
 <title>MATARI ELECTRICAL AND PLUMBING Co.</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#080808;color:white;font-family:Arial;overflow:hidden;height:100vh}
-#front-page{position:fixed; inset:0; z-index:100; background:radial-gradient(circle at 30% 20%,#0f2a44,#050a14 70%); display:flex; justify-content:center; align-items:center; transition:0.8s ease}
+body{background:#050a14;color:white;font-family:Arial;overflow-x:hidden}
+#front-page{position:fixed; inset:0; z-index:1000; background:radial-gradient(circle at 30% 20%,#0f2a44,#020610); display:flex; justify-content:center; align-items:center; transition:0.8s}
 #front-page.hide{transform:translateY(-100%); opacity:0; pointer-events:none}
-.front-box{text-align:center; padding:30px; width:420px; max-width:92vw; background:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(0,0,0,0.4)); border:1.5px solid #00aaff; border-radius:22px; box-shadow:0 0 40px rgba(0,170,255,0.3)}
-.company-name{font-family:Arial Black; font-size:24px; line-height:1.2; color:#00aaff; text-shadow:0 0 15px #00aaff; margin-bottom:8px}
-.company-sub{color:#ffcc00; font-size:12px; letter-spacing:3px; margin-bottom:25px; font-weight:700}
-.btn-main{padding:16px; border-radius:14px; border:none; font-weight:900; font-size:15px; cursor:pointer; width:100%; margin:7px 0}
-#btnCustomer{background:#00aaff; color:white; box-shadow:0 5px 20px rgba(0,170,255,0.4)}
+.front-box{text-align:center; padding:32px; width:430px; max-width:92vw; background:rgba(255,255,255,0.06); border:1.5px solid #00aaff; border-radius:22px; box-shadow:0 0 40px rgba(0,170,255,0.3)}
+.company-name{font-family:Arial Black; font-size:24px; color:#00aaff; text-shadow:0 0 15px #00aaff; line-height:1.2}
+.company-sub{color:#ffcc00; font-size:11px; letter-spacing:3px; margin:8px 0 22px; font-weight:700}
+.btn-main{width:100%; padding:16px; border-radius:14px; border:none; font-weight:900; font-size:14px; cursor:pointer; margin:6px 0}
+#btnCustomer{background:#00aaff; color:white}
 #btnStaff{background:transparent; border:2px solid #ff8c00; color:#ff8c00}
 
-/* MODAL YA MTEJA NA RADI + SHOTI NA MAJI */
-.modal{position:fixed; inset:0; z-index:200; display:none; background:#000; justify-content:center; align-items:center; overflow:hidden}
+/* MODAL YA MTEJA - RADI + SHOTI NA MAJI */
+.modal{position:fixed; inset:0; z-index:1100; display:none; background:#000; justify-content:center; align-items:center; overflow:hidden}
 .modal.show{display:flex}
 #canvas-chase{position:absolute; inset:0; z-index:1}
-.lightning-flash{position:absolute; inset:0; background:white; opacity:0; z-index:3; pointer-events:none}
+.lightning-flash{position:absolute; inset:0; background:white; opacity:0; z-index:3}
 .lightning-flash.flash{animation:flashBang 0.5s ease-out}
-@keyframes flashBang{0%{opacity:0} 8%{opacity:1} 20%{opacity:0.3} 35%{opacity:1} 100%{opacity:0}}
-.thunder-text{position:absolute; top:45%; left:50%; transform:translate(-50%,-50%) scale(0); font-family:Arial Black; font-size:80px; color:white; text-shadow:0 0 30px #00aaff; z-index:4; opacity:0; pointer-events:none}
+@keyframes flashBang{0%{opacity:0} 8%{opacity:1} 25%{opacity:0.3} 40%{opacity:1} 100%{opacity:0}}
+.thunder-text{position:absolute; top:45%; left:50%; transform:translate(-50%,-50%) scale(0); font-family:Arial Black; font-size:70px; color:white; text-shadow:0 0 30px #00aaff; z-index:4; opacity:0}
 .thunder-text.boom{animation:thunderBoom 0.7s forwards}
 @keyframes thunderBoom{0%{transform:translate(-50%,-50%) scale(0); opacity:0} 50%{transform:translate(-50%,-50%) scale(1.5); opacity:1} 100%{transform:translate(-50%,-50%) scale(1); opacity:0}}
-
-.form-box{position:relative; z-index:10; background:linear-gradient(145deg,rgba(17,31,51,0.95),rgba(10,20,38,0.95)); border:2px solid #00aaff; width:370px; max-width:92vw; padding:26px; border-radius:18px; box-shadow:0 0 50px rgba(0,170,255,0.4); transform:scale(0); opacity:0; transition:0.8s cubic-bezier(0.68,-0.55,0.265,1.55); backdrop-filter:blur(10px)}
+.form-box{position:relative; z-index:10; background:linear-gradient(145deg,rgba(17,31,51,0.97),rgba(10,20,38,0.97)); border:2px solid #00aaff; width:380px; max-width:92vw; padding:26px; border-radius:18px; transform:scale(0); opacity:0; transition:0.7s cubic-bezier(0.68,-0.55,0.265,1.55)}
 .form-box.show{transform:scale(1); opacity:1}
-.form-box h3{color:#00aaff; text-align:center; margin-bottom:18px; font-family:Arial Black}
-.form-box input{width:100%; padding:14px; margin:8px 0; border-radius:10px; border:1.5px solid #1a3a5c; background:#050a14; color:white; font-size:14px; outline:none}
-.form-box input:focus{border-color:#00aaff; box-shadow:0 0 10px rgba(0,170,255,0.3)}
-.btn-submit{width:100%; padding:14px; background:#00aaff; color:white; border:none; border-radius:10px; font-weight:800; margin-top:12px; cursor:pointer}
-.btn-cancel{width:100%; padding:10px; background:transparent; color:#888; border:none; margin-top:6px; cursor:pointer}
-.shake{animation:shakeScreen 0.6s}
-@keyframes shakeScreen{0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)}}
+.form-box h3{color:#00aaff; text-align:center; margin-bottom:16px; font-family:Arial Black}
+.form-box input, .form-box select{width:100%; padding:13px; margin:7px 0; border-radius:10px; border:1.5px solid #1a3a5c; background:#050a14; color:white; outline:none}
+.btn-submit{width:100%; padding:13px; background:#00aaff; color:white; border:none; border-radius:10px; font-weight:800; margin-top:10px; cursor:pointer}
+.btn-cancel{width:100%; padding:10px; background:transparent; color:#888; border:none; cursor:pointer}
 
-/* SHOTI NA MAJI ICONS ZINAZOKIMBIZANA */
-.chase-label{position:absolute; top:12%; left:50%; transform:translateX(-50%); z-index:5; color:#ffcc00; font-size:12px; letter-spacing:3px; font-weight:900; opacity:0}
-.chase-label.show{animation:fadeIn 1s forwards 1.5s}
-@keyframes fadeIn{to{opacity:1}}
+/* ===== NDANI - MTEJA NA MHUDUMU TOFAUTI ===== */
+.inner{position:fixed; inset:0; overflow-y:auto; display:none; background:linear-gradient(180deg,#050a14 0%,#0a1426 100%); padding:0 0 30px}
+.inner.show{display:block}
+.header{position:sticky; top:0; z-index:50; background:rgba(5,10,20,0.95); backdrop-filter:blur(10px); border-bottom:2px solid #00aaff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center}
+.header h2{font-family:Arial Black; color:#00aaff; font-size:16px}
+.header button{background:#222; color:white; border:1px solid #444; padding:8px 14px; border-radius:8px; cursor:pointer; font-size:11px}
 
-/* VITU VYA NDANI */
-#inner-content{position:fixed; inset:0; overflow-y:auto; padding-top:20px; background:#080808; display:none}
-#inner-content.show{display:block}
-.weld-text{position:fixed;top:22%;left:50%;transform:translateX(-50%);font-size:60px;color:#ff8c00;font-weight:900;text-shadow:0 0 20px #ff8c00;opacity:0;pointer-events:none;z-index:5}
-.weld-text.showW{animation:weldFlash .7s forwards}
-@keyframes weldFlash{0%{opacity:0;transform:translateX(-50%) scale(0)}50%{opacity:1;transform:translateX(-50%) scale(1.4)}100%{opacity:0;transform:translateX(-50%) scale(2)}}
-.welder-wrap{text-align:center; margin-top:40px}
-.emoji-welder{font-size:140px; filter:drop-shadow(0 0 30px #ff8c00); cursor:pointer; display:block; animation:float 2.5s infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.card{margin:20px auto; width:390px; max-width:92vw; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:2px solid #ff8c00; padding:28px; border-radius:22px}
-.card h1{color:#ff8c00; font-size:27px; text-align:center}
-.sub{color:#ffcc00; text-align:center; font-size:13px; letter-spacing:3px; margin:6px 0 20px}
-.info{background:rgba(255,255,255,.06); border:1px solid rgba(255,140,0,.2); padding:16px; border-radius:14px}
-.info p{font-size:14.5px; margin:9px 0}
-.info b{color:#ff8c00}
-.btns{display:flex; gap:10px; margin-top:20px}
-.btns a{flex:1; text-align:center; padding:14px; border-radius:12px; text-decoration:none; font-weight:900; font-size:14px}
-.btn-call{background:#ff8c00; color:#000}
-.btn-wa{background:#25D366; color:#fff}
+/* MTEJA - SERVICES KAMA MWANZO */
+.customer-hero{text-align:center; padding:22px 18px}
+.customer-hero h1{font-family:Arial Black; font-size:22px; line-height:1.2}
+.customer-hero h1 span{color:#00aaff}
+.services{display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 18px; max-width:600px; margin:0 auto}
+.service-card{background:linear-gradient(145deg,#111f33,#0a1426); border:1.5px solid #1a3a5c; border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:0.3s}
+.service-card:hover{border-color:#00aaff; transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,170,255,0.25)}
+.service-card div{font-size:32px; margin-bottom:6px}
+.service-card h4{color:#00aaff; font-size:12px}
+.service-card p{color:#777; font-size:10px; margin-top:3px}
+.order-section{max-width:600px; margin:18px auto; background:rgba(255,255,255,0.05); border:1px solid #00aaff; border-radius:16px; padding:18px; margin-left:18px; margin-right:18px}
+.my-orders{max-width:600px; margin:0 auto; padding:0 18px}
+.order-item{background:#111f33; border:1px solid #1a3a5c; border-radius:12px; padding:12px; margin:8px 0; display:flex; justify-content:space-between; align-items:center}
+.order-item b{color:#00aaff; font-size:12px}
+.order-item small{color:#888; font-size:10px}
+
+/* MHUDUMU - DASHBOARD */
+.stats{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:14px 18px; max-width:800px; margin:0 auto}
+.stat-box{background:linear-gradient(145deg,#111f33,#0a1426); border:1px solid #1a3a5c; border-radius:14px; padding:14px; text-align:center}
+.stat-box h3{color:#ffcc00; font-size:22px; font-family:Arial Black}
+.stat-box p{color:#888; font-size:10px; margin-top:4px}
+.report-controls{background:rgba(255,140,0,0.08); border:1.5px solid #ff8c00; border-radius:14px; padding:14px; margin:0 18px; max-width:800px; margin-left:auto; margin-right:auto; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.report-controls select{flex:1; padding:10px; border-radius:8px; background:#050a14; color:white; border:1px solid #ff8c00; min-width:150px}
+.report-controls button{background:#ff8c00; color:black; border:none; padding:10px 16px; border-radius:8px; font-weight:900; cursor:pointer}
+.orders-table{max-width:800px; margin:14px auto; padding:0 18px}
+.order-row{background:#0f1a2e; border:1px solid #1a3a5c; border-radius:10px; padding:12px; margin:8px 0; display:grid; grid-template-columns:1fr auto; gap:8px}
+.order-row.new{border-color:#00ff88; background:rgba(0,255,136,0.08); animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 rgba(0,255,136,0)}50%{box-shadow:0 0 15px rgba(0,255,136,0.4)}}
+.badge-new{background:#00ff88; color:black; font-size:9px; padding:3px 7px; border-radius:10px; font-weight:900}
+.alert-box{background:linear-gradient(90deg,#ff0000,#ff8c00); color:white; padding:10px 18px; margin:10px 18px; border-radius:10px; font-weight:800; font-size:13px; display:none; max-width:800px; margin-left:auto; margin-right:auto}
+.alert-box.show{display:block; animation:shake 0.5s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 </style>
 </head>
 <body>
 
 <div id="front-page">
   <div class="front-box">
-    <div style="font-size:60px; margin-bottom:10px">⚡🔧💧</div>
+    <div style="font-size:58px">⚡🔧💧</div>
     <div class="company-name">MATARI ELECTRICAL AND PLUMBING Co.</div>
     <div class="company-sub">PROFESSIONAL SERVICES</div>
-    <div style="font-size:12px; color:#888; margin:10px 0 20px">Karibu - Chagua Aina ya Mtumiaji</div>
     <button class="btn-main" id="btnCustomer" onclick="openCustomer()">👤 MTEJA - INGIA</button>
     <button class="btn-main" id="btnStaff" onclick="openStaff()">🔑 MHUDUMU - INGIA</button>
+    <p style="font-size:10px; color:#555; margin-top:10px">Mteja: Jina + Simu | Mhudumu: matari2026</p>
   </div>
 </div>
 
-<!-- MODAL YA MTEJA NA RADI + SHOTI NA MAJI -->
 <div class="modal" id="modalCustomer">
   <canvas id="canvas-chase"></canvas>
   <div class="lightning-flash" id="flash"></div>
   <div class="thunder-text" id="thunderText">⚡BOOM!⚡</div>
-  <div class="chase-label" id="chaseLabel">⚡ SHOTI NA 💧 MAJI VINAKIMBIZANA ⚡</div>
-  
   <div class="form-box" id="customerForm">
-    <div style="text-align:center; font-size:38px">⚡💧</div>
+    <div style="text-align:center; font-size:36px">⚡💧</div>
     <h3>Karibu Mteja</h3>
-    <input type="text" id="custName" placeholder="👤 Jina lako kamili">
-    <input type="tel" id="custPhone" placeholder="📞 Namba ya Simu +255...">
-    <button class="btn-submit" onclick="submitCustomer()">⚡ INGIA SASA 💧</button>
+    <input type="text" id="custName" placeholder="👤 Jina lako">
+    <input type="tel" id="custPhone" placeholder="📞 +255...">
+    <button class="btn-submit" onclick="submitCustomer()">INGIA SASA ⚡</button>
     <button class="btn-cancel" onclick="closeModals()">GHAIRI</button>
   </div>
 </div>
 
 <div class="modal" id="modalStaff">
   <div class="form-box show" style="transform:none; opacity:1; border-color:#ff8c00">
-    <h3 style="color:#ff8c00">🔑 Mhudumu - Password</h3>
-    <input type="password" id="staffPass" placeholder="Andika Password">
+    <h3 style="color:#ff8c00">🔑 Mhudumu</h3>
+    <input type="password" id="staffPass" placeholder="Password">
     <button class="btn-submit" style="background:#ff8c00; color:black" onclick="submitStaff()">INGIA</button>
     <button class="btn-cancel" onclick="closeModals()">GHAIRI</button>
-    <p style="font-size:11px; color:#666; text-align:center; margin-top:10px">matari2026</p>
+    <p style="font-size:10px; color:#666; text-align:center; margin-top:8px">Default: matari2026</p>
   </div>
 </div>
 
-<div id="inner-content">
-  <div class="weld-text" id="weldText">WELDING! ⚡</div>
-  <div class="welder-wrap" onclick="startWelding()">
-    <span class="emoji-welder">👨🏾‍🏭</span>
-    <p style="color:#ff8c00;margin-top:10px;font-size:14px;letter-spacing:2px">👆 BONYEZA KUANZA</p>
+<!-- ============ NDANI YA MTEJA - SERVICES KAMA MWANZO ============ -->
+<div class="inner" id="innerCustomer">
+  <div class="header"><h2>👤 MATARI - MTEJA</h2><div><span id="custDisplay" style="font-size:11px; color:#00aaff; margin-right:10px"></span><button onclick="logout()">TOKA</button></div></div>
+  
+  <div class="customer-hero">
+    <h1>Huduma Bora za <span>Umeme na Bomba</span></h1>
+    <p style="color:#888; font-size:12px; margin-top:8px">Chagua huduma unayohitaji na weka oda sasa</p>
   </div>
-  <div class="card">
-    <h1>MATARI ELECTRICAL</h1>
-    <div class="sub">AND PLUMBING Co.</div>
-    <div class="info">
-      <p><b>📍 Huduma:</b> Umeme, Bomba, Solar, Grill</p>
-      <p><b>👤 Mteja:</b> <span id="displayCustomer">Bado hajaingia</span></p>
-      <p><b>📞 Simu:</b> +255 658 618 740</p>
+
+  <div class="services" id="servicesGrid">
+    <div class="service-card" onclick="selectService('Wiring Nyumba')"><div>💡</div><h4>Wiring Nyumba</h4><p>Umeme wa ndani/nje</p></div>
+    <div class="service-card" onclick="selectService('Plumbing')"><div>🚿</div><h4>Plumbing</h4><p>Mabomba na Mifumo</p></div>
+    <div class="service-card" onclick="selectService('Welding & Grill')"><div>👨🏾‍🏭</div><h4>Welding & Grill</h4><p>Milango, Madirisha</p></div>
+    <div class="service-card" onclick="selectService('Solar System')"><div>☀️</div><h4>Solar System</h4><p>Sola na Backup</p></div>
+    <div class="service-card" onclick="selectService('Matengenezo')"><div>🔧</div><h4>Matengenezo</h4><p>Hitilafu zote</p></div>
+    <div class="service-card" onclick="selectService('CCTV')"><div>📹</div><h4>CCTV & Security</h4><p>Kamera na Alamu</p></div>
+  </div>
+
+  <div class="order-section">
+    <h3 style="color:#00aaff; font-size:14px; margin-bottom:10px">📝 Weka Oda Mpya</h3>
+    <select id="orderService"><option value="">Chagua Huduma...</option><option>Wiring Nyumba</option><option>Plumbing</option><option>Welding & Grill</option><option>Solar System</option><option>Matengenezo</option><option>CCTV</option></select>
+    <input type="text" id="orderDesc" placeholder="Maelezo mafupi: mf. Wiring chumba 2...">
+    <input type="text" id="orderLocation" placeholder="Mahali: mf. Mbezi, Tegeta...">
+    <button class="btn-submit" onclick="placeOrder()">⚡ TUMA ODA SASA</button>
+  </div>
+
+  <div class="my-orders">
+    <h3 style="color:#ffcc00; font-size:13px; margin:14px 0 8px">📦 Oda Zangu</h3>
+    <div id="myOrdersList"><p style="color:#555; font-size:11px">Bado hakuna oda...</p></div>
+  </div>
+
+  <div style="max-width:600px; margin:20px auto; padding:0 18px">
+    <div style="background:#111; border:1px solid #ff8c00; border-radius:12px; padding:14px; text-align:center">
+      <p style="font-size:12px; color:#ff8c00; font-weight:800">📞 Wasiliana Moja kwa Moja</p>
+      <div style="display:flex; gap:8px; margin-top:10px">
+        <a href="tel:+255658618740" style="flex:1; background:#ff8c00; color:black; padding:10px; border-radius:8px; text-decoration:none; font-weight:900; font-size:12px; text-align:center">📞 PIGA</a>
+        <a href="https://wa.me/255658618740" style="flex:1; background:#25D366; color:white; padding:10px; border-radius:8px; text-decoration:none; font-weight:900; font-size:12px; text-align:center">💬 WA</a>
+      </div>
     </div>
-    <div class="btns">
-      <a class="btn-call" href="tel:+255658618740">📞 PIGA SIMU</a>
-      <a class="btn-wa" href="https://wa.me/255658618740">💬 WHATSAPP</a>
+  </div>
+</div>
+
+<!-- ============ NDANI YA MHUDUMU - RIPOTI, ODA, STATISTICS ============ -->
+<div class="inner" id="innerStaff">
+  <div class="header" style="border-color:#ff8c00"><h2 style="color:#ff8c00">🔑 MATARI - MHUDUMU DASHBOARD</h2><button onclick="logout()">TOKA</button></div>
+  
+  <div class="alert-box" id="alertBox">🔔 ODA MPYA IMEPOKELEWA! ⚡💧</div>
+
+  <div class="stats">
+    <div class="stat-box"><h3 id="statToday">0</h3><p>LEO</p></div>
+    <div class="stat-box"><h3 id="statWeek">0</h3><p>WIKI HII</p></div>
+    <div class="stat-box"><h3 id="statMonth">0</h3><p>MWEZI HUU</p></div>
+    <div class="stat-box"><h3 id="statYear">0</h3><p>MWAKA HUU</p></div>
+    <div class="stat-box"><h3 id="statTotal">0</h3><p>JUMLA ODA</p></div>
+    <div class="stat-box"><h3 id="statCustomers">0</h3><p>WATEJA</p></div>
+  </div>
+
+  <div class="report-controls">
+    <label style="font-size:12px; color:#ff8c00; font-weight:800">📊 RIPOTI:</label>
+    <select id="reportPeriod" onchange="generateReport()">
+      <option value="1">Mwezi 1 Uliopita</option>
+      <option value="3" selected>Miezi 3 Iliyopita</option>
+      <option value="6">Miezi 6 Iliyopita</option>
+      <option value="12">Miezi 12 (Mwaka)</option>
+      <option value="24">Miaka 2</option>
+    </select>
+    <button onclick="generateReport()">🔄 ONYESHA RIPOTI</button>
+    <button onclick="exportReport()" style="background:#00aaff; color:white">📥 PAKUA</button>
+  </div>
+
+  <div style="max-width:800px; margin:14px auto; padding:0 18px; background:rgba(255,255,255,0.05); border-radius:12px; padding:14px">
+    <h3 style="color:#ff8c00; font-size:13px; margin-bottom:10px">📈 Ripoti ya <span id="reportLabel">Miezi 3</span></h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px">
+      <div>Oda: <b id="repOrders" style="color:#00aaff">0</b></div>
+      <div>Wateja: <b id="repCustomers" style="color:#ffcc00">0</b></div>
+      <div>Huduma Maarufu: <b id="repPopular" style="color:#00ff88">-</b></div>
+      <div>Wastani / Mwezi: <b id="repAvg" style="color:#ff8c00">0</b></div>
     </div>
+    <canvas id="reportCanvas" width="700" height="150" style="width:100%; margin-top:12px; background:#050a14; border-radius:8px"></canvas>
+  </div>
+
+  <div class="orders-table">
+    <h3 style="color:#ff8c00; font-size:14px; margin-bottom:8px">📦 ODA ZOTE - <span id="ordersCount">0</span> <span style="font-size:10px; color:#00ff88; margin-left:10px" id="newOrdersBadge"></span></h3>
+    <div id="allOrdersList"><p style="color:#555; font-size:11px">Hakuna oda bado...</p></div>
   </div>
 </div>
 
 <script>
-// ===== SAUTI YA RADI =====
-let audioCtx;
-function initAudio(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
-function playThunder(){
-  try{
-    if(!audioCtx) initAudio();
-    let ctx=audioCtx;
-    for(let i=0;i<3;i++){ let o=ctx.createOscillator(); let g=ctx.createGain(); let f=ctx.createBiquadFilter(); o.type='sawtooth'; o.frequency.setValueAtTime(50+Math.random()*30, ctx.currentTime+i*0.15); o.frequency.exponentialRampToValueAtTime(20, ctx.currentTime+i*0.15+1.5); f.type='lowpass'; f.frequency.value=300; g.gain.setValueAtTime(0, ctx.currentTime+i*0.15); g.gain.linearRampToValueAtTime(0.7, ctx.currentTime+i*0.15+0.05); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+i*0.15+1.8); o.connect(f); f.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime+i*0.15); o.stop(ctx.currentTime+i*0.15+2); }
-    let co=ctx.createOscillator(); let cg=ctx.createGain(); co.type='square'; co.frequency.setValueAtTime(800, ctx.currentTime); co.frequency.exponentialRampToValueAtTime(50, ctx.currentTime+0.3); cg.gain.setValueAtTime(1, ctx.currentTime); cg.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.4); co.connect(cg); cg.connect(ctx.destination); co.start(); co.stop(ctx.currentTime+0.4);
-  }catch(e){}
-}
+// SAUTI
+let audioCtx; function initAudio(){ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }
+function playThunder(){ try{ if(!audioCtx) initAudio(); let ctx=audioCtx; for(let i=0;i<2;i++){ let o=ctx.createOscillator(), g=ctx.createGain(), f=ctx.createBiquadFilter(); o.type='sawtooth'; o.frequency.setValueAtTime(60, ctx.currentTime+i*0.2); o.frequency.exponentialRampToValueAtTime(20, ctx.currentTime+i*0.2+1); f.type='lowpass'; f.frequency.value=300; g.gain.setValueAtTime(0.6, ctx.currentTime+i*0.2); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+i*0.2+1.2); o.connect(f); f.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime+i*0.2); o.stop(ctx.currentTime+i*0.2+1.2); } let o2=ctx.createOscillator(), g2=ctx.createGain(); o2.type='square'; o2.frequency.setValueAtTime(800, ctx.currentTime); o2.frequency.exponentialRampToValueAtTime(50, ctx.currentTime+0.3); g2.gain.setValueAtTime(1, ctx.currentTime); g2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.3); o2.connect(g2); g2.connect(ctx.destination); o2.start(); o2.stop(ctx.currentTime+0.3); }catch(e){} }
 
-// ===== CANVAS YA SHOTI NA MAJI ZINAKIMBIZANA =====
-let canvas = document.getElementById('canvas-chase');
-let ctx2 = canvas.getContext('2d');
-let particles = [];
-let animId;
+// CANVAS SHOTI NA MAJI
+let canvas=document.getElementById('canvas-chase'), ctx2=canvas.getContext('2d'), particles=[], animId;
+function resizeCanvas(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+window.addEventListener('resize', resizeCanvas); resizeCanvas();
+class P{ constructor(t){ this.type=t; this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*5; this.vy=(Math.random()-0.5)*5; this.size=t==='s'?10:8; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width) this.vx*=-1; if(this.y<0||this.y>canvas.height) this.vy*=-1; for(let o of particles){ if(o===this) continue; let dx=o.x-this.x, dy=o.y-this.y, d=Math.sqrt(dx*dx+dy*dy); if(d<140&&d>5){ if(this.type==='s'&&o.type==='m'){ this.vx+=dx/d*0.07; this.vy+=dy/d*0.07; } if(this.type==='m'&&o.type==='s'){ this.vx-=dx/d*0.05; this.vy-=dy/d*0.05; } } } } draw(){ ctx2.shadowBlur=12; ctx2.shadowColor=this.type==='s'?'#ffcc00':'#00aaff'; ctx2.font=this.size*2+'px Arial'; ctx2.fillText(this.type==='s'?'⚡':'💧', this.x, this.y); ctx2.shadowBlur=0; } }
+function animate(){ ctx2.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(); p.draw(); }); animId=requestAnimationFrame(animate); }
+function startChase(){ particles=[]; for(let i=0;i<10;i++) particles.push(new P('s')); for(let i=0;i<10;i++) particles.push(new P('m')); cancelAnimationFrame(animId); animate(); }
+function stopChase(){ cancelAnimationFrame(animId); }
 
-function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Particle{
-  constructor(type){
-    this.type = type; // 'shoti' au 'maji'
-    this.x = Math.random()*canvas.width;
-    this.y = Math.random()*canvas.height;
-    this.vx = (Math.random()-0.5)*6;
-    this.vy = (Math.random()-0.5)*6;
-    this.size = type==='shoti' ? 8+Math.random()*8 : 6+Math.random()*10;
-    this.life = 1;
-  }
-  update(){
-    this.x += this.vx; this.y += this.vy;
-    // Bounce
-    if(this.x<0 || this.x>canvas.width) this.vx*=-1;
-    if(this.y<0 || this.y>canvas.height) this.vy*=-1;
-    // Kimbizana - shoti inafukuza maji, maji inakimbia shoti
-    for(let p of particles){
-      if(p===this) continue;
-      let dx = p.x - this.x, dy = p.y - this.y, dist = Math.sqrt(dx*dx+dy*dy);
-      if(dist<150 && dist>10){
-        if(this.type==='shoti' && p.type==='maji'){
-          this.vx += dx/dist*0.08; this.vy += dy/dist*0.08; // shoti inafukuza maji
-        }
-        if(this.type==='maji' && p.type==='shoti'){
-          this.vx -= dx/dist*0.06; this.vy -= dy/dist*0.06; // maji inakimbia
-        }
-      }
-    }
-    this.vx*=0.99; this.vy*=0.99;
-  }
-  draw(){
-    if(this.type==='shoti'){
-      // Shoti - umeme
-      ctx2.shadowBlur = 15; ctx2.shadowColor = '#ffcc00';
-      ctx2.fillStyle = '#ffcc00';
-      ctx2.font = this.size*2.2+'px Arial';
-      ctx2.fillText('⚡', this.x, this.y);
-      // Mkia
-      ctx2.beginPath(); ctx2.strokeStyle = 'rgba(255,204,0,0.3)'; ctx2.lineWidth=2;
-      ctx2.moveTo(this.x, this.y); ctx2.lineTo(this.x-this.vx*3, this.y-this.vy*3); ctx2.stroke();
-    } else {
-      // Maji
-      ctx2.shadowBlur = 12; ctx2.shadowColor = '#00aaff';
-      ctx2.fillStyle = '#00aaff';
-      ctx2.font = this.size*2+'px Arial';
-      ctx2.fillText('💧', this.x, this.y);
-      ctx2.beginPath(); ctx2.strokeStyle = 'rgba(0,170,255,0.3)'; ctx2.lineWidth=2;
-      ctx2.moveTo(this.x, this.y); ctx2.lineTo(this.x-this.vx*3, this.y-this.vy*3); ctx2.stroke();
-    }
-    ctx2.shadowBlur = 0;
-  }
-}
-
-function animateChase(){
-  ctx2.clearRect(0,0,canvas.width,canvas.height);
-  // Background ya radi kidogo
-  ctx2.fillStyle = 'rgba(0,0,0,0.08)'; ctx2.fillRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{ p.update(); p.draw(); });
-  // Connect shoti na maji karibu
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      let a=particles[i], b=particles[j];
-      if(a.type!==b.type){
-        let dx=a.x-b.x, dy=a.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
-        if(d<120){
-          ctx2.beginPath(); ctx2.strokeStyle=`rgba(0,170,255,${0.15*(1-d/120)})`;
-          ctx2.lineWidth=1; ctx2.moveTo(a.x,a.y); ctx2.lineTo(b.x,b.y); ctx2.stroke();
-        }
-      }
-    }
-  }
-  animId = requestAnimationFrame(animateChase);
-}
-
-function startChase(){
-  particles = [];
-  for(let i=0;i<10;i++) particles.push(new Particle('shoti'));
-  for(let i=0;i<10;i++) particles.push(new Particle('maji'));
-  if(animId) cancelAnimationFrame(animId);
-  animateChase();
-}
-function stopChase(){ if(animId) cancelAnimationFrame(animId); ctx2.clearRect(0,0,canvas.width,canvas.height); }
-
-// ===== LOGIC YA MTEJA =====
-function openCustomer(){
-  initAudio();
-  document.getElementById('modalCustomer').classList.add('show');
-  document.getElementById('customerForm').classList.remove('show');
-  document.getElementById('flash').classList.remove('flash');
-  document.getElementById('thunderText').classList.remove('boom');
-  document.getElementById('chaseLabel').classList.remove('show');
-  
-  resizeCanvas(); startChase();
-  if(navigator.vibrate) navigator.vibrate([80,40,80,40,400]);
-  playThunder();
-  
-  setTimeout(()=>{
-    document.getElementById('flash').classList.add('flash');
-    document.body.classList.add('shake');
-    document.getElementById('thunderText').classList.add('boom');
-    document.getElementById('chaseLabel').classList.add('show');
-    setTimeout(()=>playThunder(),300);
-  },100);
-  
-  setTimeout(()=>{
-    document.body.classList.remove('shake');
-    document.getElementById('customerForm').classList.add('show');
-  },1200);
-}
-
+// MODALS
+function openCustomer(){ initAudio(); document.getElementById('modalCustomer').classList.add('show'); document.getElementById('customerForm').classList.remove('show'); document.getElementById('flash').classList.remove('flash'); document.getElementById('thunderText').classList.remove('boom'); resizeCanvas(); startChase(); if(navigator.vibrate) navigator.vibrate([80,40,80,40,300]); playThunder(); setTimeout(()=>{ document.getElementById('flash').classList.add('flash'); document.getElementById('thunderText').classList.add('boom'); setTimeout(()=>playThunder(),300); },120); setTimeout(()=>{ document.getElementById('customerForm').classList.add('show'); },1300); }
 function openStaff(){ document.getElementById('modalStaff').classList.add('show'); }
-function closeModals(){
-  document.getElementById('modalCustomer').classList.remove('show');
-  document.getElementById('modalStaff').classList.remove('show');
-  document.getElementById('customerForm').classList.remove('show');
-  stopChase();
-}
+function closeModals(){ document.getElementById('modalCustomer').classList.remove('show'); document.getElementById('modalStaff').classList.remove('show'); document.getElementById('customerForm').classList.remove('show'); stopChase(); }
+
+// DATA
+let currentCustomer=null;
+function getOrders(){ return JSON.parse(localStorage.getItem('matari_orders')||'[]'); }
+function saveOrders(o){ localStorage.setItem('matari_orders', JSON.stringify(o)); }
+
 function submitCustomer(){
-  let name=document.getElementById('custName').value;
-  let phone=document.getElementById('custPhone').value;
-  if(!name || !phone){ alert('Jaza jina na namba!'); return; }
-  document.getElementById('displayCustomer').innerHTML = name + ' (' + phone + ')';
+  let n=document.getElementById('custName').value.trim(), p=document.getElementById('custPhone').value.trim();
+  if(!n||!p){ alert('Jaza jina na namba!'); return; }
+  currentCustomer={name:n, phone:p, time:Date.now()};
+  localStorage.setItem('matari_current_customer', JSON.stringify(currentCustomer));
+  document.getElementById('custDisplay').textContent=n+' | '+p;
   document.getElementById('front-page').classList.add('hide');
-  document.getElementById('inner-content').classList.add('show');
-  closeModals();
+  document.getElementById('innerCustomer').classList.add('show');
+  closeModals(); loadMyOrders();
 }
 function submitStaff(){
-  let pass=document.getElementById('staffPass').value;
-  if(pass==='matari2026' || pass==='1234'){
+  let pw=document.getElementById('staffPass').value;
+  if(pw==='matari2026'||pw==='1234'){
     document.getElementById('front-page').classList.add('hide');
-    document.getElementById('inner-content').classList.add('show');
-    document.getElementById('displayCustomer').innerHTML = 'MHUDUMU (Admin)';
-    closeModals();
-  } else { alert('Password si sahihi!'); }
+    document.getElementById('innerStaff').classList.add('show');
+    closeModals(); loadStaffDashboard(); checkNewOrders();
+  } else alert('Password si sahihi! matari2026');
 }
-function startWelding(){
-  let t=document.getElementById('weldText'); t.classList.add('showW');
-  for(let i=0;i<35;i++){ setTimeout(()=>{ let s=document.createElement('div'); s.style.position='fixed'; s.style.left='50%'; s.style.top='58%'; s.style.width='5px'; s.style.height='5px'; s.style.background=Math.random()>0.5?'#ff8c00':'#ffcc00'; s.style.borderRadius='50%'; let x=(Math.random()*700-350), y=(Math.random()*500-250); s.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${x}px,${y}px)`,opacity:0}],{duration:700}); document.body.appendChild(s); setTimeout(()=>s.remove(),800); }, i*35); }
-  setTimeout(()=>{ t.classList.remove('showW'); },700);
+function logout(){ document.getElementById('front-page').classList.remove('hide'); document.querySelectorAll('.inner').forEach(e=>e.classList.remove('show')); }
+function selectService(s){ document.getElementById('orderService').value=s; document.querySelector('.order-section').scrollIntoView({behavior:'smooth'}); }
+function placeOrder(){
+  let service=document.getElementById('orderService').value, desc=document.getElementById('orderDesc').value.trim(), loc=document.getElementById('orderLocation').value.trim();
+  if(!service){ alert('Chagua huduma!'); return; }
+  if(!desc){ alert('Andika maelezo!'); return; }
+  let orders=getOrders();
+  let order={id:'ORD'+Date.now(), customer:currentCustomer.name, phone:currentCustomer.phone, service, desc, location:loc||'Haijatajwa', status:'Mpya', date:new Date().toISOString(), timestamp:Date.now()};
+  orders.unshift(order); saveOrders(orders);
+  document.getElementById('orderDesc').value=''; document.getElementById('orderLocation').value='';
+  alert('✅ Oda yako imetumwa! ⚡💧 Mhudumu ataiona sasa!'); loadMyOrders();
+  // Alert kwa mhudumu kama yuko
+  localStorage.setItem('matari_new_order_alert','1');
 }
+function loadMyOrders(){
+  let orders=getOrders().filter(o=>o.phone===currentCustomer.phone);
+  let div=document.getElementById('myOrdersList');
+  if(!orders.length){ div.innerHTML='<p style="color:#555;font-size:11px">Bado hakuna oda...</p>'; return; }
+  div.innerHTML=orders.map(o=>`<div class="order-item"><div><b>${o.service}</b><br><small>${o.desc} - ${o.location}</small><br><small style="color:#555">${new Date(o.date).toLocaleDateString()}</small></div><div><span style="background:${o.status==='Mpya'?'#00ff88':'#ffcc00'}; color:black; padding:3px 8px; border-radius:10px; font-size:9px; font-weight:900">${o.status}</span></div></div>`).join('');
+}
+
+// STAFF DASHBOARD
+function loadStaffDashboard(){ generateStats(); generateReport(); loadAllOrders(); }
+function generateStats(){
+  let orders=getOrders(); let now=Date.now();
+  let today=orders.filter(o=>new Date(o.date).toDateString()===new Date().toDateString()).length;
+  let week=orders.filter(o=>now-o.timestamp<7*24*3600*1000).length;
+  let month=orders.filter(o=>now-o.timestamp<30*24*3600*1000).length;
+  let year=orders.filter(o=>now-o.timestamp<365*24*3600*1000).length;
+  let customers=[...new Set(orders.map(o=>o.phone))].length;
+  document.getElementById('statToday').textContent=today; document.getElementById('statWeek').textContent=week; document.getElementById('statMonth').textContent=month; document.getElementById('statYear').textContent=year; document.getElementById('statTotal').textContent=orders.length; document.getElementById('statCustomers').textContent=customers;
+  document.getElementById('ordersCount').textContent=orders.length;
+}
+function generateReport(){
+  let months=parseInt(document.getElementById('reportPeriod').value); let orders=getOrders(); let cutoff=Date.now()-months*30*24*3600*1000;
+  let filtered=orders.filter(o=>o.timestamp>cutoff);
+  document.getElementById('reportLabel').textContent='Miezi '+months;
+  document.getElementById('repOrders').textContent=filtered.length;
+  document.getElementById('repCustomers').textContent=[...new Set(filtered.map(o=>o.phone))].length;
+  let svcCount={}; filtered.forEach(o=>svcCount[o.service]=(svcCount[o.service]||0)+1);
+  let popular=Object.keys(svcCount).sort((a,b)=>svcCount[b]-svcCount[a])[0]||'-';
+  document.getElementById('repPopular').textContent=popular;
+  document.getElementById('repAvg').textContent=months>0?(filtered.length/months).toFixed(1):0;
+  // Draw chart
+  let c=document.getElementById('reportCanvas'), ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle='#050a14'; ctx.fillRect(0,0,c.width,c.height);
+  if(filtered.length>0){
+    let monthly={}; filtered.forEach(o=>{ let d=new Date(o.date); let key=d.getMonth()+'/'+d.getFullYear(); monthly[key]=(monthly[key]||0)+1; });
+    let keys=Object.keys(monthly); let max=Math.max(...Object.values(monthly),1);
+    ctx.strokeStyle='#00aaff'; ctx.lineWidth=2; ctx.beginPath();
+    keys.forEach((k,i)=>{ let x=50+i*(600/keys.length), y=120-(monthly[k]/max*80); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); ctx.fillStyle='#ffcc00'; ctx.fillRect(x-2,y-2,4,4); ctx.fillStyle='#888'; ctx.font='10px Arial'; ctx.fillText(k, x-15, 135); });
+    ctx.stroke();
+  } else { ctx.fillStyle='#555'; ctx.font='12px Arial'; ctx.fillText('Hakuna data kwa miezi '+months, 200, 75); }
+}
+function loadAllOrders(){
+  let orders=getOrders(); let div=document.getElementById('allOrdersList');
+  if(!orders.length){ div.innerHTML='<p style="color:#555">Hakuna oda...</p>'; return; }
+  div.innerHTML=orders.map(o=>{
+    let isNew=Date.now()-o.timestamp<24*3600*1000 && o.status==='Mpya';
+    return `<div class="order-row ${isNew?'new':''}"><div><b style="color:#00aaff">${o.service}</b> ${isNew?'<span class="badge-new">MPYA!</span>':''}<br><small style="color:#ccc">👤 ${o.customer} | 📞 ${o.phone}</small><br><small style="color:#888">${o.desc} | 📍 ${o.location}</small><br><small style="color:#555">${new Date(o.date).toLocaleString()}</small></div><div><button onclick="updateStatus('${o.id}','Imekamilika')" style="background:#00ff88; color:black; border:none; padding:5px 10px; border-radius:6px; font-size:10px; font-weight:800; cursor:pointer">KAMILISHA</button><br><button onclick="deleteOrder('${o.id}')" style="background:#ff4444; color:white; border:none; padding:4px 8px; border-radius:6px; font-size:9px; margin-top:5px; cursor:pointer">FUTA</button></div></div>`;
+  }).join('');
+}
+function checkNewOrders(){
+  if(localStorage.getItem('matari_new_order_alert')==='1'){
+    let box=document.getElementById('alertBox'); box.classList.add('show'); box.textContent='🔔 ODA MPYA! ⚡ Mteja ametuma oda - Angalia hapa chini! 💧';
+    playThunder(); if(navigator.vibrate) navigator.vibrate([100,50,100]);
+    setTimeout(()=>box.classList.remove('show'),6000); localStorage.removeItem('matari_new_order_alert');
+    let badge=document.getElementById('newOrdersBadge'); badge.textContent='• ODA MPYA INAINGIA!';
+  }
+}
+function updateStatus(id, status){ let orders=getOrders(); let idx=orders.findIndex(o=>o.id===id); if(idx>=0){ orders[idx].status=status; saveOrders(orders); loadAllOrders(); generateStats(); generateReport(); } }
+function deleteOrder(id){ if(confirm('Futa oda hii?')){ let orders=getOrders().filter(o=>o.id!==id); saveOrders(orders); loadAllOrders(); generateStats(); generateReport(); } }
+function exportReport(){ let orders=getOrders(); let data='data:text/csv;charset=utf-8,'+'ID,Mteja,Simu,Huduma,Maelezo,Mahali,Tarehe,Status\n'+orders.map(o=>`${o.id},${o.customer},${o.phone},${o.service},${o.desc},${o.location},${o.date},${o.status}`).join('\n'); let a=document.createElement('a'); a.href=encodeURI(data); a.download='MATARI_Ripoti_'+new Date().toISOString().slice(0,10)+'.csv'; a.click(); }
+
 document.body.addEventListener('click', initAudio, {once:true});
+setInterval(()=>{ if(document.getElementById('innerStaff').classList.contains('show')) checkNewOrders(); },3000);
 </script>
 </body>
 </html>
