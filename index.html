@@ -5,178 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MATARI ELECTRICAL AND PLUMBING Co.</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#050a14;color:white;font-family:Arial;overflow-x:hidden}
-#front-page{position:fixed; inset:0; z-index:500; background:radial-gradient(circle at 30% 20%,#0f2a44,#020610); display:flex; justify-content:center; align-items:center; transition:0.8s}
-#front-page.hide{transform:translateY(-100%); opacity:0; pointer-events:none}
-.front-box{text-align:center; padding:35px; width:430px; max-width:92vw; background:rgba(255,255,255,0.05); border:1.5px solid #00aaff; border-radius:22px; box-shadow:0 0 40px rgba(0,170,255,0.25)}
-.company-name{font-family:Arial Black; font-size:26px; color:#00aaff; text-shadow:0 0 20px #00aaff; line-height:1.2}
-.company-sub{color:#ffcc00; font-size:12px; letter-spacing:3px; margin:8px 0 28px; font-weight:700}
-.btn-main{width:100%; padding:17px; border-radius:14px; border:none; font-weight:900; font-size:15px; cursor:pointer; margin:7px 0}
-#btnCustomer{background:#00aaff; color:white}
-#btnStaff{background:transparent; border:2px solid #ff8c00; color:#ff8c00}
-
-/* RADI MODAL */
-.modal{position:fixed; inset:0; z-index:600; display:none; background:#000; justify-content:center; align-items:center; overflow:hidden}
+body{margin:0;background:#020610;color:white;font-family:Arial;min-height:100vh}
+#front-page{position:fixed;inset:0;z-index:9999;background:#0a1426;display:flex;justify-content:center;align-items:center;padding:20px}
+.front-box{background:white;color:#020610;padding:30px;border-radius:20px;width:400px;max-width:95vw;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.8)}
+.company-name{font-family:Arial Black;font-size:22px;color:#0a3d8f;line-height:1.2}
+.company-sub{color:#ff8c00;font-weight:900;font-size:11px;letter-spacing:2px;margin:8px 0 20px}
+.btn-main{width:100%;padding:16px;border-radius:12px;border:none;font-weight:900;font-size:14px;cursor:pointer;margin:6px 0}
+#btnCustomer{background:#00aaff;color:white}
+#btnStaff{background:#222;color:white;border:2px solid #ff8c00}
+#inner-content{padding:20px;max-width:700px;margin:0 auto}
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.service-grid div{background:#111f33;border:1px solid #00aaff;padding:15px;border-radius:12px;text-align:center}
+.contact{background:#1a1a1a;border:2px solid #ff8c00;padding:20px;border-radius:15px;margin-top:20px}
+.modal{position:fixed;inset:0;z-index:10000;display:none;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;padding:20px}
 .modal.show{display:flex}
-.lightning-flash{position:absolute; inset:0; background:white; opacity:0; z-index:1}
-.lightning-flash.flash{animation:flashBang 0.5s ease-out}
-@keyframes flashBang{0%{opacity:0} 8%{opacity:1} 18%{opacity:0.2} 28%{opacity:1} 100%{opacity:0}}
-.lightning-bolt{position:absolute; top:-20%; left:50%; width:4px; height:0; background:linear-gradient(to bottom, white, #00aaff, transparent); box-shadow:0 0 20px white, 0 0 40px #00aaff; opacity:0; z-index:2}
-.lightning-bolt.strike{animation:strikeDown 0.6s forwards}
-@keyframes strikeDown{0%{height:0; opacity:0; top:-20%} 20%{opacity:1} 100%{height:130%; opacity:0; top:0}}
-.thunder-text{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(0); font-family:Arial Black; font-size:85px; color:white; text-shadow:0 0 30px #00aaff; z-index:3; opacity:0}
-.thunder-text.boom{animation:thunderBoom 0.7s forwards}
-@keyframes thunderBoom{0%{transform:translate(-50%,-50%) scale(0); opacity:0} 50%{transform:translate(-50%,-50%) scale(1.6); opacity:1} 100%{transform:translate(-50%,-50%) scale(1); opacity:0}}
-.form-box{position:relative; z-index:10; background:linear-gradient(145deg,#111f33,#0a1426); border:2px solid #00aaff; width:370px; max-width:92vw; padding:28px; border-radius:20px; transform:scale(0); opacity:0; transition:0.8s cubic-bezier(0.68,-0.55,0.265,1.55)}
-.form-box.show{transform:scale(1); opacity:1}
-.form-box h3{color:#00aaff; text-align:center; margin-bottom:20px; font-family:Arial Black}
-.form-box input{width:100%; padding:15px; margin:9px 0; border-radius:12px; border:1.5px solid #1a3a5c; background:#050a14; color:white; outline:none}
-.btn-submit{width:100%; padding:15px; background:#00aaff; color:white; border:none; border-radius:12px; font-weight:900; margin-top:15px; cursor:pointer}
-.btn-cancel{width:100%; padding:12px; background:transparent; color:#888; border:none; margin-top:8px; cursor:pointer}
-.shake{animation:shakeScreen 0.6s}
-@keyframes shakeScreen{0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)}}
-
-/* ===== VITU VYA NDANI - SASA VIPO! ===== */
-#inner-content{display:block; padding:0; min-height:100vh; background:linear-gradient(180deg,#080808 0%,#0f1a2e 100%)}
-.header{padding:18px; text-align:center; background:rgba(0,0,0,0.8); border-bottom:2px solid #00aaff; position:sticky; top:0; z-index:10; backdrop-filter:blur(10px)}
-.header h1{font-family:Arial Black; color:#00aaff; font-size:22px}
-.header p{color:#ffcc00; font-size:11px; letter-spacing:2px}
-.hero{padding:30px 20px; text-align:center}
-.hero h2{font-size:28px; color:white; font-family:Arial Black; line-height:1.2}
-.hero h2 span{color:#00aaff}
-.hero p{color:#aaa; font-size:14px; margin:12px 0}
-.badge{display:inline-block; background:rgba(0,170,255,0.15); border:1px solid #00aaff; color:#00aaff; padding:6px 14px; border-radius:20px; font-size:12px; margin:5px; font-weight:700}
-.services{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:20px; max-width:600px; margin:0 auto}
-.service-card{background:linear-gradient(145deg,#111f33,#0a1426); border:1px solid #1a3a5c; border-radius:16px; padding:18px; text-align:center; transition:0.3s}
-.service-card:hover{border-color:#00aaff; transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,170,255,0.2)}
-.service-card div{font-size:32px; margin-bottom:8px}
-.service-card h4{color:#00aaff; font-size:13px; margin-bottom:4px}
-.service-card p{color:#888; font-size:11px}
-.contact-box{max-width:600px; margin:20px auto; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:2px solid #ff8c00; padding:22px; border-radius:18px; margin-left:20px; margin-right:20px}
-.contact-box h3{color:#ff8c00; text-align:center; margin-bottom:12px}
-.contact-row{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #222; font-size:13px}
-.contact-row b{color:#ff8c00}
-.action-btns{display:flex; gap:10px; margin-top:18px}
-.action-btns a{flex:1; text-align:center; padding:14px; border-radius:12px; text-decoration:none; font-weight:900; font-size:13px}
-.btn-call{background:#ff8c00; color:black}
-.btn-wa{background:#25D366; color:white}
-.customer-info{background:rgba(0,170,255,0.1); border:1px solid #00aaff; padding:12px; border-radius:10px; margin-bottom:15px; font-size:13px; text-align:center}
+.form-box{background:white;color:#020610;padding:25px;border-radius:15px;width:350px;max-width:95vw}
+.form-box input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+.form-box button{width:100%;padding:12px;background:#00aaff;color:white;border:none;border-radius:8px;font-weight:900;margin-top:10px}
+.flash{position:fixed;inset:0;background:white;z-index:10001;animation:flash 0.5s}
+@keyframes flash{0%{opacity:0}10%{opacity:1}100%{opacity:0}}
 </style>
 </head>
 <body>
 
 <div id="front-page">
   <div class="front-box">
-    <div style="font-size:55px">⚡🔧💧</div>
+    <div style="font-size:50px">⚡🔧💧</div>
     <div class="company-name">MATARI ELECTRICAL AND PLUMBING Co.</div>
     <div class="company-sub">PROFESSIONAL SERVICES</div>
-    <button class="btn-main" id="btnCustomer" onclick="openCustomerThunder()">👤 MTEJA - INGIA</button>
-    <button class="btn-main" id="btnStaff" onclick="openStaff()">🔑 MHUDUMU - INGIA</button>
+    <button class="btn-main" id="btnCustomer" onclick="openCust()">👤 MTEJA - INGIA</button>
+    <button class="btn-main" id="btnStaff" onclick="document.getElementById('modalStaff').classList.add('show')">🔑 MHUDUMU - INGIA</button>
+    <p style="font-size:11px;color:#888;margin-top:10px">⚡ Itapiga RADI kubwa!</p>
   </div>
 </div>
 
-<div class="modal" id="modalCustomer">
-  <div style="position:absolute; inset:0; pointer-events:none">
-    <div class="lightning-flash" id="flash"></div>
-    <div class="lightning-bolt" id="bolt"></div>
-    <div class="lightning-bolt" id="bolt2" style="left:45%"></div>
-    <div class="lightning-bolt" id="bolt3" style="left:55%"></div>
-    <div class="thunder-text" id="thunderText">⚡BOOM!⚡</div>
-  </div>
-  <div class="form-box" id="customerForm">
-    <h3>⚡ Karibu Mteja!</h3>
-    <input type="text" id="custName" placeholder="👤 Jina lako">
-    <input type="tel" id="custPhone" placeholder="📱 Namba ya Simu">
-    <button class="btn-submit" onclick="submitCustomer()">INGIA SASA</button>
-    <button class="btn-cancel" onclick="closeAll()">GHAIRI</button>
+<div class="modal" id="modalCust">
+  <div class="form-box">
+    <h3 style="text-align:center">⚡ Karibu Mteja</h3>
+    <input id="cName" placeholder="Jina lako">
+    <input id="cPhone" placeholder="Namba ya Simu +255...">
+    <button onclick="enterCust()">INGIA SASA ⚡</button>
+    <button onclick="closeAll()" style="background:#eee;color:#333">GHAIRI</button>
   </div>
 </div>
 
 <div class="modal" id="modalStaff">
-  <div class="form-box show" style="transform:none; opacity:1; border-color:#ff8c00">
-    <h3 style="color:#ff8c00">🔑 Mhudumu</h3>
-    <input type="password" id="staffPass" placeholder="Password">
-    <button class="btn-submit" style="background:#ff8c00; color:black" onclick="submitStaff()">INGIA</button>
-    <button class="btn-cancel" onclick="closeAll()">GHAIRI</button>
-    <p style="font-size:10px; color:#666; text-align:center; margin-top:8px">matari2026</p>
+  <div class="form-box">
+    <h3 style="text-align:center;color:#ff8c00">🔑 Mhudumu</h3>
+    <input id="sPass" type="password" placeholder="Password">
+    <button onclick="enterStaff()" style="background:#ff8c00;color:black">INGIA</button>
+    <button onclick="closeAll()" style="background:#eee;color:#333">GHAIRI</button>
+    <p style="text-align:center;font-size:10px;color:#888;margin-top:5px">Password: matari2026</p>
   </div>
 </div>
 
-<!-- ============ NDANI YOTE HAPA - SASA INAONEKANA! ============ -->
 <div id="inner-content">
-  <div class="header">
-    <h1>MATARI ELECTRICAL AND PLUMBING Co.</h1>
-    <p>⚡ UMEME • 💧 BOMBA • 🔧 GRILL & WELDING • ☀️ SOLAR</p>
+  <h1 style="text-align:center;color:#00aaff;font-family:Arial Black">MATARI ELECTRICAL AND PLUMBING Co.</h1>
+  <p style="text-align:center;color:#ffcc00;font-size:12px;letter-spacing:2px">UMEME • BOMBA • WELDING • SOLAR</p>
+  
+  <div id="welcome" style="background:rgba(0,170,255,0.15);border:1px solid #00aaff;padding:12px;border-radius:10px;margin:15px 0;text-align:center">👤 Mteja: Bado hajaingia</div>
+
+  <div class="service-grid">
+    <div><div style="font-size:28px">💡</div><b>Wiring</b><br><small>Umeme wa nyumba</small></div>
+    <div><div style="font-size:28px">🚿</div><b>Plumbing</b><br><small>Mabomba</small></div>
+    <div><div style="font-size:28px">👨🏾‍🏭</div><b>Welding</b><br><small>Grill & Milango</small></div>
+    <div><div style="font-size:28px">☀️</div><b>Solar</b><br><small>Sola & Backup</small></div>
   </div>
 
-  <div class="hero">
-    <h2>Huduma Bora za <span>Umeme na Bomba</span></h2>
-    <p>Tunatoa huduma za kitaalamu Dar es Salaam na mikoa yote. Wataalamu wenye uzoefu wa miaka 10+</p>
-    <div style="margin-top:15px">
-      <span class="badge">✅ LESENI HALALI</span>
-      <span class="badge">⚡ HARAKA</span>
-      <span class="badge">💰 BEI NAFUU</span>
-    </div>
-    <div class="customer-info" id="customerInfo">👤 Mteja: Bado hajaingia - Bonyeza MTEJA juu</div>
-  </div>
-
-  <div class="services">
-    <div class="service-card"><div>💡</div><h4>Wiring Nyumba</h4><p>Umeme wa ndani na nje</p></div>
-    <div class="service-card"><div>🚿</div><h4>Plumbing</h4><p>Mabomba na Mifumo ya Maji</p></div>
-    <div class="service-card"><div>👨🏾‍🏭</div><h4>Welding & Grill</h4><p>Milango, Madirisha, Grill</p></div>
-    <div class="service-card"><div>☀️</div><h4>Solar System</h4><p>Sola na Backup Power</p></div>
-    <div class="service-card"><div>🔧</div><h4>Matengenezo</h4><p>Kurekebisha hitilafu zote</p></div>
-    <div class="service-card"><div>📹</div><h4>CCTV & Security</h4><p>Kamera na Alamu</p></div>
-  </div>
-
-  <div class="contact-box">
-    <h3>📞 Wasiliana Nasi Sasa</h3>
-    <div class="contact-row"><span>📍 Mahali:</span><b>Dar es Salaam - Bagamoyo</b></div>
-    <div class="contact-row"><span>📞 Simu:</span><b>+255 658 618 740</b></div>
-    <div class="contact-row"><span>⏰ Muda:</span><b>24/7 - Kila Siku</b></div>
-    <div class="contact-row"><span>👤 Mmiliki:</span><b>MATARI Co.</b></div>
-    <div class="action-btns">
-      <a class="btn-call" href="tel:+255658618740">📞 PIGA SIMU</a>
-      <a class="btn-wa" href="https://wa.me/255658618740?text=Habari%20MATARI%20naomba%20huduma">💬 WHATSAPP</a>
+  <div class="contact">
+    <h3 style="color:#ff8c00;text-align:center">📞 Wasiliana Nasi</h3>
+    <p>📍 Dar es Salaam - Bagamoyo</p>
+    <p>📞 +255 658 618 740</p>
+    <p>⏰ 24/7 Kila Siku</p>
+    <div style="display:flex;gap:10px;margin-top:15px">
+      <a href="tel:+255658618740" style="flex:1;background:#ff8c00;color:black;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:900">📞 PIGA</a>
+      <a href="https://wa.me/255658618740" style="flex:1;background:#25D366;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:900">💬 WHATSAPP</a>
     </div>
   </div>
-
-  <div style="text-align:center; padding:25px; color:#444; font-size:11px">
-    © 2026 MATARI ELECTRICAL AND PLUMBING Co. - Powered by Abdukadiri Liula
-  </div>
+  <p style="text-align:center;color:#555;font-size:10px;margin:20px">© 2026 MATARI - by Abdukadiri Liula</p>
 </div>
 
 <script>
-let audioCtx;
-function initAudio(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
-function playThunderSound(){
-  initAudio(); let ctx=audioCtx;
-  for(let i=0;i<3;i++){ let o=ctx.createOscillator(); let g=ctx.createGain(); let f=ctx.createBiquadFilter(); o.type='sawtooth'; o.frequency.setValueAtTime(40+Math.random()*30, ctx.currentTime+i*0.15); o.frequency.exponentialRampToValueAtTime(20, ctx.currentTime+i*0.15+1.5); f.type='lowpass'; f.frequency.value=300; g.gain.setValueAtTime(0, ctx.currentTime+i*0.15); g.gain.linearRampToValueAtTime(0.8, ctx.currentTime+i*0.15+0.05); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+i*0.15+1.8); o.connect(f); f.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime+i*0.15); o.stop(ctx.currentTime+i*0.15+2); }
-  let co=ctx.createOscillator(); let cg=ctx.createGain(); co.type='square'; co.frequency.setValueAtTime(800, ctx.currentTime); co.frequency.exponentialRampToValueAtTime(50, ctx.currentTime+0.3); cg.gain.setValueAtTime(1, ctx.currentTime); cg.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.4); co.connect(cg); cg.connect(ctx.destination); co.start(); co.stop(ctx.currentTime+0.4);
+let ctx;
+function playThunder(){
+  try{
+    if(!ctx) ctx=new(window.AudioContext||window.webkitAudioContext)();
+    let o=ctx.createOscillator(); let g=ctx.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(60,ctx.currentTime); o.frequency.exponentialRampToValueAtTime(20,ctx.currentTime+1); g.gain.setValueAtTime(0.8,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+1.2); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime+1.2);
+    let o2=ctx.createOscillator(); let g2=ctx.createGain(); o2.type='square'; o2.frequency.setValueAtTime(900,ctx.currentTime); o2.frequency.exponentialRampToValueAtTime(50,ctx.currentTime+0.3); g2.gain.setValueAtTime(1,ctx.currentTime); g2.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.35); o2.connect(g2); g2.connect(ctx.destination); o2.start(); o2.stop(ctx.currentTime+0.35);
+  }catch(e){}
 }
-function openCustomerThunder(){
-  initAudio();
-  let modal=document.getElementById('modalCustomer'); let flash=document.getElementById('flash'); let bolts=[document.getElementById('bolt'),document.getElementById('bolt2'),document.getElementById('bolt3')]; let tText=document.getElementById('thunderText'); let form=document.getElementById('customerForm');
-  modal.classList.add('show'); form.classList.remove('show');
-  flash.classList.remove('flash'); bolts.forEach(b=>b.classList.remove('strike')); tText.classList.remove('boom');
-  if(navigator.vibrate) navigator.vibrate([80,40,80,40,400]); playThunderSound();
-  setTimeout(()=>{ flash.classList.add('flash'); document.body.classList.add('shake'); bolts.forEach(b=>b.classList.add('strike')); tText.classList.add('boom'); setTimeout(()=>playThunderSound(),300); },80);
-  setTimeout(()=>{ document.body.classList.remove('shake'); form.classList.add('show'); },1400);
+function openCust(){
+  playThunder();
+  let f=document.createElement('div'); f.className='flash'; document.body.appendChild(f);
+  if(navigator.vibrate) navigator.vibrate([100,50,200]);
+  setTimeout(()=>{f.remove(); document.getElementById('modalCust').classList.add('show');},400);
 }
-function openStaff(){ document.getElementById('modalStaff').classList.add('show'); }
-function closeAll(){ document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show')); document.getElementById('customerForm').classList.remove('show'); }
-function submitCustomer(){
-  let n=document.getElementById('custName').value; let p=document.getElementById('custPhone').value;
-  if(!n||!p){ alert('Jaza jina na namba!'); return; }
-  document.getElementById('customerInfo').innerHTML = '✅ Karibu <b>'+n+'</b> ('+p+') - Uko ndani sasa! ⚡';
-  document.getElementById('front-page').classList.add('hide'); closeAll();
+function closeAll(){ document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show')); }
+function enterCust(){
+  let n=document.getElementById('cName').value; let p=document.getElementById('cPhone').value;
+  if(!n||!p){alert('Jaza jina na namba');return}
+  document.getElementById('welcome').innerHTML='✅ Karibu <b>'+n+'</b> ('+p+') ⚡';
+  document.getElementById('front-page').style.display='none'; closeAll();
 }
-function submitStaff(){
-  let pw=document.getElementById('staffPass').value;
-  if(pw==='matari2026' || pw==='1234'){ document.getElementById('customerInfo').innerHTML='🔑 MHUDUMU (Admin) - Uko ndani!'; document.getElementById('front-page').classList.add('hide'); closeAll(); } else { alert('Password si sahihi!'); }
+function enterStaff(){
+  let pw=document.getElementById('sPass').value;
+  if(pw==='matari2026'||pw==='1234'){ document.getElementById('welcome').innerHTML='🔑 MHUDUMU (Admin) Uko ndani!'; document.getElementById('front-page').style.display='none'; closeAll(); }else{alert('Password si sahihi - matari2026');}
 }
-document.body.addEventListener('click', initAudio, {once:true});
 </script>
 </body>
 </html>
