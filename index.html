@@ -1,34 +1,165 @@
 <!DOCTYPE html>
 <html lang="sw">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>MATARI SYSTEM</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#070d1f;color:#fff;min-height:100vh}.topbar{height:56px;background:linear-gradient(90deg,#0a1931,#102a5a);display:flex;align-items:center;justify-content:space-between;padding:0 20px}.logo{font-weight:900}.logo span{color:#ffcc00}.landing{height:calc(100vh - 56px);background:radial-gradient(ellipse 800px 400px at 50% 15%,#132a5c,#070d1f 60%);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}.matari-logo{width:110px;height:110px;background:linear-gradient(135deg,#ffcc00,#ff9500);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;color:#000}.main-title{font-size:36px;font-weight:900;margin-top:14px}.main-title span{color:#ffcc00}.btns{margin-top:26px;display:flex;gap:14px}.btn{padding:15px 32px;border-radius:28px;border:none;font-weight:900;font-size:15px;cursor:pointer;min-width:160px}.btn-mteja{background:linear-gradient(90deg,#ffcc00,#ff9500);color:#000}.btn-mtoa{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff}.modal{position:fixed;inset:0;background:rgba(2,5,16,.93);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px;overflow:auto}.modal.active{display:flex}.card{background:#fff;color:#0f172a;border-radius:24px;padding:24px;max-width:500px;width:100%}.card input,.card select,.card textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #e2e8f0;margin:6px 0}.btn-submit{width:100%;background:#0a1931;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer}.btn-ws{background:linear-gradient(90deg,#25D366,#128C7E);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;margin-top:10px;cursor:pointer;width:100%}.portal{display:none;min-height:100vh;background:#f5f7fb;color:#0f172a;overflow:auto}.portal.active{display:block}.p-header{background:#0a1931;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}.grid{padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1250px;margin:0 auto}.s-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 8px 25px rgba(0,0,0,.06)}.price-tag{font-size:13px;background:#f1f5f9;padding:4px 10px;border-radius:8px;display:inline-block;margin:6px 0;font-weight:700}.price-tag.fixed{background:#fff7d6;color:#92400e;border:1px solid #ffcc00}.btn-choose{width:100%;background:#0a1931;color:#fff;border:none;padding:11px;border-radius:12px;font-weight:800;margin-top:10px;cursor:pointer}.qty{display:flex;align-items:center;gap:10px;margin:8px 0}.qty button{width:34px;height:34px;border-radius:50%;border:1px solid #e2e8f0;background:#f8fafc;font-weight:900;cursor:pointer}.order-card{background:#fff;border-radius:14px;padding:14px;margin:10px 0;border-left:5px solid #ffcc00}.tabs{display:flex;gap:8px;padding:12px 16px;background:#fff;border-bottom:1px solid #eef2ff}.tab{padding:8px 14px;border-radius:18px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-weight:700;font-size:12px}.tab.active{background:#0a1931;color:#fff}.badge{background:#ffcc00;color:#000;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:900}.alert{background:#fff3cd;border:1px solid #ffcc00;padding:12px;border-radius:12px;font-weight:800;margin-bottom:12px}</style></head><body>
-<div class="topbar"><div class="logo">MATARI <span>ELECTRICAL AND PLUMBING</span></div><div style="font-size:11px;color:#8a9bb5">0787571967</div></div>
-<div class="landing" id="landing"><div class="matari-logo">M</div><div class="main-title">MATARI<br><span>ELECTRICAL AND PLUMBING</span></div><div style="margin-top:8px;color:#8a9bb5;font-size:13px">Mkoa • Wilaya • Kata • Mtaa - Tunakufikia popote</div><div class="btns"><button class="btn btn-mteja" onclick="openMteja()">👤 MTEJA</button><button class="btn btn-mtoa" onclick="openMtoa()">👑 MTOA HUDUMA</button></div></div>
-<div class="portal" id="portalMteja"><div class="p-header"><div><b>MATARI</b> - Chagua Huduma</div><button onclick="home()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 14px;border-radius:18px">🏠</button></div><div style="background:#0a1931;color:#fff;padding:12px;text-align:center;font-size:13px">CCTV ni <b style="color:#ffcc00">30k kwa kamera moja</b> • AC ni <b style="color:#ffcc00">70k kwa moja</b> • Zingine ni Makubaliano</div><div class="grid" id="servicesGrid"></div></div>
-<div class="modal" id="orderForm"><div class="card"><h2 id="formTitle">Jaza Taarifa Zako</h2><p style="font-size:12px;color:#64748b;margin:6px 0">Huduma: <b id="selectedService"></b></p><div id="qtyBox" style="display:none"><div class="qty"><button onclick="changeFormQty(-1)">-</button><span id="formQty" style="font-weight:900;font-size:18px;min-width:30px;text-align:center">1</span><button onclick="changeFormQty(1)">+</button><span id="formQtyPrice" style="margin-left:auto;font-weight:900"></span></div></div><input id="fJina" placeholder="Jina kamili *"><input id="fSimu" placeholder="Simu 07... *"><select id="fMkoa" onchange="loadWilaya2()"><option value="">Chagua Mkoa *</option></select><select id="fWilaya"><option value="">Chagua Wilaya *</option></select><input id="fKata" placeholder="Kata *"><input id="fMtaa" placeholder="Mtaa na nyumba *"><textarea id="fMaelezo" placeholder="Maelezo (hiari)" rows="2"></textarea><button class="btn-ws" onclick="submitOrder()">📲 SUBMIT - Tuma Oda</button><button onclick="closeModal('orderForm')" style="width:100%;background:#f1f5f9;border:none;padding:10px;border-radius:10px;margin-top:8px">Ghairi</button></div></div>
-<div class="modal" id="mtoaLogin"><div class="card"><h2>Mtoa Huduma - Login</h2><input id="mPass" type="password" placeholder="matari2026"><button class="btn-submit" onclick="loginMtoa()">INGIA</button><p style="font-size:11px;color:#94a3b8;margin-top:6px">matari2026 / 1234 / boss</p><button onclick="closeModal('mtoaLogin')" style="width:100%;background:#f1f5f9;border:none;padding:10px;border-radius:10px;margin-top:8px">Ghairi</button></div></div>
-<div class="portal" id="portalMtoa"><div class="p-header"><div><b>MATARI - MTOA HUDUMA</b> | <span id="pendingBadge"></span></div><button onclick="home()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 14px;border-radius:18px">🏠</button></div><div class="tabs"><div class="tab active" onclick="switchTab('tabOrders',this)">📦 Oda Zote</div><div class="tab" onclick="switchTab('tabReports',this)">📊 Ripoti & Faida</div></div><div id="tabOrders"><div style="padding:14px;max-width:1100px;margin:0 auto"><div id="alertBox" class="alert" style="display:none">⚠️ Kuna <span id="alertCount">0</span> oda haijafanyiwa kazi!</div><div id="ordersList"></div></div></div><div id="tabReports" style="display:none"><div style="padding:14px;max-width:1100px;margin:0 auto"><h3>📊 Ripoti za Faida</h3><div id="stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0"></div><div style="background:#fff;border-radius:16px;padding:16px"><div style="display:flex;gap:8px;flex-wrap:wrap"><button onclick="genPDF('wiki')" style="background:#0a1931;color:#fff;border:none;padding:10px 14px;border-radius:10px">📄 Wiki PDF</button><button onclick="genPDF('mwezi')" style="background:#ffcc00;color:#000;border:none;padding:10px 14px;border-radius:10px">📄 Mwezi PDF</button><button onclick="window.print()" style="background:#f1f5f9;border:1px solid #ddd;padding:10px 14px;border-radius:10px">🖨️ Print</button></div><div id="reportInfo" style="margin-top:12px;background:#f8fafc;padding:12px;border-radius:10px;font-size:13px"></div><div id="profitList" style="margin-top:12px"></div></div></div></div></div>
-<div class="modal" id="finishModal"><div class="card"><h2>✅ Maliza Kazi - Jaza Gharama</h2><p style="font-size:12px;color:#64748b;margin:6px 0">Oda ya: <b id="finishName"></b></p><input id="gUsafiri" type="number" placeholder="Gharama za Usafiri (TZS) *"><input id="gWasaidizi" type="number" placeholder="Malipo ya Wasaidizi (TZS) *"><input id="gPesa" type="number" placeholder="Pesa uliyolipwa na Mteja (TZS) *"><div id="faidaBox" style="background:#f0fdf4;border:1px solid #86efac;padding:10px;border-radius:10px;margin-top:8px;display:none"><div style="display:flex;justify-content:space-between"><span>Faida:</span><b id="faidaVal" style="color:#16a34a">0 TZS</b></div><div style="font-size:11px;color:#64748b">Faida = Pesa - (Usafiri + Wasaidizi)</div></div><button class="btn-submit" style="background:#25D366" onclick="saveFinish()">💾 Hifadhi na Hesabu Faida</button><button onclick="closeModal('finishModal')" style="width:100%;background:#f1f5f9;border:none;padding:10px;border-radius:10px;margin-top:8px">Ghairi</button></div></div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATARI ELECTRICAL AND PLUMBING</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--gold:#FFC400;--gold2:#FF8C00;--bg:#080C1A;--card:#10182F;--neon:0 0 20px rgba(255,196,0,0.6)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;background:radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 40% 70%,#FFC400,transparent);opacity:0.3}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px 5%;background:rgba(8,12,26,0.95);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,196,0,0.2)}
+.logo{font-family:'Orbitron',sans-serif;font-weight:900}
+.logo span{color:var(--gold)}
+.btn-login{padding:8px 18px;border-radius:20px;border:1px solid var(--gold);background:#fff;color:#000;font-weight:800;cursor:pointer}
+.hero{text-align:center;padding:50px 5% 20px}
+.hero h1{font-family:'Orbitron';font-size:clamp(40px,10vw,90px);color:var(--gold);text-shadow:var(--neon)}
+.hero h2{font-family:'Orbitron';letter-spacing:5px;margin:15px 0;font-size:clamp(12px,2vw,20px)}
+.badge{display:inline-block;padding:6px 16px;border-radius:30px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);letter-spacing:2px;font-size:11px;margin:10px 0}
+.btn-main{display:inline-flex;padding:16px 30px;border-radius:50px;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;font-weight:900;border:none;cursor:pointer;box-shadow:0 10px 25px rgba(255,196,0,0.4);margin:8px;transition:0.2s}
+.btn-main:hover{transform:scale(1.03)}
+.counters{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:30px 5%}
+.counter-card{background:var(--card);border:1px solid rgba(255,196,0,0.2);border-radius:15px;padding:15px 25px;text-align:center;min-width:120px}
+.counter-card b{font-family:'Orbitron';font-size:28px;color:var(--gold);display:block}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:20px 5%}
+.card{background:var(--card);border-radius:15px;padding:20px;border:1px solid rgba(255,255,255,0.08)}
+.order-section{margin:40px 5%;background:var(--card);border:1px solid var(--gold);border-radius:20px;padding:25px}
+.order-section h3{font-family:'Orbitron';color:var(--gold);margin-bottom:15px}
+.input{width:100%;padding:12px 15px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:#fff;margin:8px 0}
+.alert-bar{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#ff0000,#ff4444);padding:12px 20px;border-radius:30px;font-weight:800;z-index:999;display:none;box-shadow:0 10px 20px rgba(255,0,0,0.4);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
+.admin{margin:30px 5%;background:var(--card);border-radius:20px;padding:25px;border:1px solid rgba(255,196,0,0.3)}
+.order-item{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);border-left:4px solid var(--gold);border-radius:12px;padding:15px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.order-item.done{border-left-color:#25D366;opacity:0.6}
+.btn-done{padding:8px 16px;border-radius:20px;background:#25D366;color:#fff;border:none;font-weight:700;cursor:pointer}
+.btn-pending{padding:8px 16px;border-radius:20px;background:var(--gold);color:#000;border:none;font-weight:700;cursor:pointer}
+.reports{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin:20px 0}
+.report-box{background:rgba(0,0,0,0.4);border-radius:15px;padding:15px;text-align:center;border:1px solid rgba(255,196,0,0.2)}
+.whatsapp{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 20px rgba(37,211,102,0.5);z-index:998;animation:bounce 1.5s infinite;text-decoration:none}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="header"><div class="logo">MATARI <span>ELECTRICAL AND PLUMBING</span></div><button class="btn-login" onclick="document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'})">ADMIN 🔧</button></div>
+<div class="alert-bar" id="alertBar">⚠️ ODA HAIJAFANYIWA!</div>
+
+<div class="hero">
+<h1>MATARI</h1>
+<h2>ELECTRICAL AND PLUMBING</h2>
+<div class="badge">SOLAR • CCTV • AC • WIRING • PLUMBING</div><br>
+<button class="btn-main" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">⚡ FUNDI WA UMEME & BOMBA ⚡</button><br>
+<button class="btn-main" style="background:linear-gradient(90deg,#FFC400,#FFE55C)" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">⚡ NUNUA HUDUMA SASA ✨</button>
+</div>
+
+<div class="counters">
+<div class="counter-card"><b id="c1">0</b><span>Wateja</span></div>
+<div class="counter-card"><b id="c2">0</b><span>Miradi</span></div>
+<div class="counter-card"><b id="c3">5</b><span>Miaka</span></div>
+<div class="counter-card"><b>24/7</b><span>Huduma</span></div>
+</div>
+
+<div class="services">
+<div class="card">☀️ <b>SOLAR POWER</b><br><small>Umeme wa Jua</small></div>
+<div class="card">📹 <b>CCTV</b><br><small>Ulinzi</small></div>
+<div class="card">❄️ <b>AC</b><br><small>Viyoyozi</small></div>
+<div class="card">💡 <b>WIRING</b><br><small>Umeme Nyumbani</small></div>
+<div class="card">🚿 <b>PLUMBING</b><br><small>Bomba</small></div>
+<div class="card">🔧 <b>24H</b><br><small>Darura</small></div>
+</div>
+
+<div class="order-section" id="orderForm">
+<h3>📝 WEKA ODA YAKO HAPA</h3>
+<input class="input" id="jina" placeholder="Jina lako (mf: Juma Mbezi)">
+<input class="input" id="simu" placeholder="Namba ya simu (mf: 0712345678)">
+<select class="input" id="huduma">
+<option>Chagua Huduma</option>
+<option>SOLAR POWER</option>
+<option>CCTV CAMERA</option>
+<option>AC / FRIDGE</option>
+<option>WIRING - Umeme</option>
+<option>PLUMBING - Bomba</option>
+<option>Darura 24H</option>
+</select>
+<textarea class="input" id="maelezo" placeholder="Elezea tatizo"></textarea>
+<input class="input" id="mahali" placeholder="Mahali ulipo (mf: Mbezi Beach)">
+<button class="btn-main" style="width:100%;justify-content:center" onclick="wekaOda()">TUMA ODA SASA 🚀</button>
+</div>
+
+<div class="admin" id="adminPanel">
+<h3 style="font-family:Orbitron;color:var(--gold)">📊 ADMIN PANEL - MATARI</h3>
+<div class="reports">
+<div class="report-box"><b>📅 Wiki Hii</b><br><span id="wiki" style="font-size:28px;color:var(--gold)">0</span><br><small>Oda</small></div>
+<div class="report-box"><b>🗓️ Mwezi Huu</b><br><span id="mwezi" style="font-size:28px;color:var(--gold)">0</span><br><small>Oda</small></div>
+<div class="report-box"><b>📆 Mwaka Huu</b><br><span id="mwaka" style="font-size:28px;color:var(--gold)">0</span><br><small>Oda</small></div>
+<div class="report-box"><b>⏳ Bado</b><br><span id="bado" style="font-size:28px;color:#ff4444">0</span><br><small>Haijafanyiwa</small></div>
+</div>
+<canvas id="chart" style="max-height:250px;margin:20px 0"></canvas>
+<h4 style="margin:20px 0 10px">📋 ODA ZOTE</h4>
+<div id="odaList"><small style="opacity:0.5">Hakuna oda bado...</small></div>
+<div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+<button class="btn-main" onclick="safishaZote()" style="background:#ff4444;color:#fff">Futa Zote</button>
+<button class="btn-main" onclick="downloadReport()" style="background:#fff;color:#000">Pakua Ripoti CSV</button>
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/255700000000" target="_blank">💬</a>
+
 <script>
-const mikoaData={"Dar es Salaam":["Ilala","Kinondoni","Temeke","Ubungo","Kigamboni"],"Arusha":["Arusha Mjini","Arumeru","Karatu"],"Mwanza":["Ilemela","Nyamagana","Magu"],"Dodoma":["Dodoma Mjini","Bahi"],"Mbeya":["Mbeya Mjini","Chunya"],"Morogoro":["Morogoro Mjini","Kilosa"],"Tanga":["Tanga Mjini","Muheza"],"Kilimanjaro":["Moshi Mjini","Hai"],"Geita":["Geita Mjini","Bukombe"],"Kagera":["Bukoba Mjini","Muleba"],"Zanzibar":["Mjini Magharibi","Kusini Unguja"],"Pwani":["Kibaha","Bagamoyo"],"Mara":["Musoma Mjini","Bunda"],"Shinyanga":["Shinyanga Mjini","Kahama"],"Tabora":["Tabora Mjini","Igunga"],"Kigoma":["Kigoma Mjini","Kasulu"],"Lindi":["Lindi Mjini","Kilwa"],"Mtwara":["Mtwara Mjini","Masasi"],"Ruvuma":["Songea Mjini","Mbinga"],"Iringa":["Iringa Mjini","Kilolo"],"Njombe":["Njombe Mjini","Makete"],"Singida":["Singida Mjini","Manyoni"],"Manyara":["Babati Mjini","Hanang"],"Rukwa":["Sumbawanga Mjini"],"Katavi":["Mpanda Mjini"],"Simiyu":["Bariadi"],"Songwe":["Mbozi"]};
-const services=[{id:1,name:'CCTV Installation',price:30000,unit:'kamera',desc:'30,000 TZS kwa kila kamera moja',icon:'📹',fixed:true},{id:2,name:'AC Installation',price:70000,unit:'AC',desc:'70,000 TZS kwa kila AC moja',icon:'❄️',fixed:true},{id:3,name:'AC Repair',price:0,desc:'Bei ni Makubaliano na mtoa huduma',icon:'🔧',fixed:false},{id:4,name:'Wiring Nyumba',price:0,desc:'Makubaliano - Wiring kisasa + COC',icon:'🔌',fixed:false},{id:5,name:'Solar System',price:0,desc:'Makubaliano - Umeme wa jua',icon:'☀️',fixed:false},{id:6,name:'Dish Azam/DSTV',price:0,desc:'Makubaliano',icon:'📡',fixed:false},{id:7,name:'Plumbing - Mabomba',price:0,desc:'Makubaliano - Mabomba',icon:'🚿',fixed:false},{id:8,name:'Water Pump',price:0,desc:'Makubaliano',icon:'💧',fixed:false},{id:9,name:'Choo/Bafu',price:0,desc:'Makubaliano',icon:'🚽',fixed:false},{id:10,name:'Electrical Repair',price:0,desc:'Makubaliano - Socket, Short',icon:'⚡',fixed:false}];
-let selectedService=null,formQty=1,finishOrderId=null;
-function initMikoa(){const s=document.getElementById('fMkoa');s.innerHTML='<option value="">Chagua Mkoa *</option>'+Object.keys(mikoaData).map(m=>`<option value="${m}">${m}</option>`).join('')}initMikoa();
-function loadWilaya2(){const m=document.getElementById('fMkoa').value,w=document.getElementById('fWilaya');if(!m||!mikoaData[m]){w.innerHTML='<option value="">Chagua Wilaya *</option>';return}w.innerHTML='<option value="">Chagua Wilaya *</option>'+mikoaData[m].map(x=>`<option value="${x}">${x}</option>`).join('')}
-function openMteja(){document.getElementById('landing').style.display='none';document.getElementById('portalMteja').classList.add('active');renderServices()}
-function openMtoa(){document.getElementById('mtoaLogin').classList.add('active')}
-function closeModal(id){document.getElementById(id).classList.remove('active')}
-function home(){document.querySelectorAll('.portal').forEach(p=>p.classList.remove('active'));document.getElementById('landing').style.display='flex';closeModal('mtoaLogin');closeModal('orderForm');closeModal('finishModal')}
-function renderServices(){document.getElementById('servicesGrid').innerHTML=services.map(s=>`<div class="s-card"><div style="font-size:32px">${s.icon}</div><h3>${s.name}</h3><p>${s.desc}</p><div class="price-tag ${s.fixed?'fixed':''}">${s.fixed?s.price.toLocaleString()+' TZS / '+s.unit:'Bei: Makubaliano'}</div><button class="btn-choose" onclick="chooseService(${s.id})">👉 Chagua Huduma Hii</button></div>`).join('')}
-function chooseService(id){selectedService=services.find(s=>s.id===id);formQty=1;document.getElementById('selectedService').innerText=selectedService.name+(selectedService.fixed?` - ${selectedService.price.toLocaleString()} TZS / ${selectedService.unit}`:' - Makubaliano');document.getElementById('qtyBox').style.display=selectedService.fixed?'block':'none';document.getElementById('formQty').innerText='1';document.getElementById('formQtyPrice').innerText=selectedService.fixed?(selectedService.price*1).toLocaleString()+' TZS':'';document.getElementById('orderForm').classList.add('active')}
-function changeFormQty(d){formQty+=d;if(formQty<1)formQty=1;document.getElementById('formQty').innerText=formQty;if(selectedService.fixed){document.getElementById('formQtyPrice').innerText=(selectedService.price*formQty).toLocaleString()+' TZS'}}
-function submitOrder(){const jina=document.getElementById('fJina').value.trim(),simu=document.getElementById('fSimu').value.trim(),mkoa=document.getElementById('fMkoa').value,wilaya=document.getElementById('fWilaya').value,kata=document.getElementById('fKata').value.trim(),mtaa=document.getElementById('fMtaa').value.trim(),maelezo=document.getElementById('fMaelezo').value.trim();if(!jina||!simu||!mkoa||!wilaya||!kata||!mtaa){alert('Jaza taarifa zote: Jina, Simu, Mkoa, Wilaya, Kata, Mtaa');return}const qty=selectedService.fixed?formQty:1,total=selectedService.fixed?selectedService.price*qty:0,totalText=selectedService.fixed?total.toLocaleString()+' TZS':'Makubaliano';const msg=`*ODA MPYA - MATARI*%0A%0AJina: ${jina}%0ASimu: ${simu}%0AMkoa: ${mkoa}%0AWilaya: ${wilaya}%0AKata: ${kata}%0AMtaa: ${mtaa}%0A%0AHuduma: ${selectedService.name}%0A${selectedService.fixed?`Idadi: ${qty} ${selectedService.unit}%0ABei kwa moja: ${selectedService.price.toLocaleString()} TZS%0AJumla: ${totalText}%0A`:''}%0AMaelezo: ${maelezo||'Hakuna'}`;const order={id:Date.now(),service:selectedService.name,serviceId:selectedService.id,qty,unit:selectedService.unit,price:total,fixed:selectedService.fixed,jina,simu,location:{mkoa,wilaya,kata,mtaa,maelezo},status:'pending',time:new Date().toLocaleString(),date:new Date().toISOString()};const orders=JSON.parse(localStorage.getItem('matari_orders_final')||'[]');orders.push(order);localStorage.setItem('matari_orders_final',JSON.stringify(orders));window.open(`https://wa.me/255787571967?text=${msg}`,'_blank');closeModal('orderForm');alert('Oda imetumwa kwa mtoa huduma! Atakupigia '+simu);document.getElementById('fJina').value='';document.getElementById('fSimu').value='';document.getElementById('fKata').value='';document.getElementById('fMtaa').value='';document.getElementById('fMaelezo').value=''}
-function loginMtoa(){const p=document.getElementById('mPass').value.trim();if(p.length>0){closeModal('mtoaLogin');document.getElementById('landing').style.display='none';document.getElementById('portalMtoa').classList.add('active');loadOrders();loadReports()}else alert('Weka password: matari2026')}
-function loadOrders(){const orders=JSON.parse(localStorage.getItem('matari_orders_final')||'[]');const pending=orders.filter(o=>o.status==='pending').length;document.getElementById('alertCount').innerText=pending;document.getElementById('alertBox').style.display=pending>0?'block':'none';document.getElementById('pendingBadge').innerHTML=pending>0?`<span class="badge">${pending} ODA HAIJAFANYIWA!</span>`:`<span style="background:#25D366;color:#fff;padding:4px 10px;border-radius:12px;font-size:11px">Zote zimehudumiwa</span>`;const list=document.getElementById('ordersList');if(!orders.length){list.innerHTML='<p style="color:#94a3b8;text-align:center;padding:20px">Hakuna oda</p>';return}list.innerHTML=orders.slice().reverse().map(o=>`<div class="order-card ${o.status==='done'?'done':''}"><div style="display:flex;justify-content:space-between"><div><b>${o.jina}</b> - ${o.simu}<br><small style="color:#64748b">${o.time} | ${o.location.mkoa}, ${o.location.wilaya}, ${o.location.kata}, ${o.location.mtaa}</small><br><small>${o.service} ${o.fixed?`x${o.qty} ${o.unit} - ${o.price.toLocaleString()} TZS`:''}</small></div><span style="background:${o.status==='pending'?'#ffcc00':'#25D366'};color:${o.status==='pending'?'#000':'#fff'};padding:4px 10px;border-radius:12px;font-size:11px;font-weight:800">${o.status==='pending'?'PENDING':'DONE'}</span></div>${o.status==='pending'?`<button onclick="openFinish(${o.id})" style="margin-top:10px;background:#0a1931;color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:800;width:100%;cursor:pointer">✅ Nimemaliza - Jaza Gharama & Faida</button>`:`<div style="margin-top:10px;background:#f0fdf4;padding:10px;border-radius:10px;font-size:13px"><div>Usafiri: ${o.costs?.usafiri?.toLocaleString()||0} | Wasaidizi: ${o.costs?.wasaidizi?.toLocaleString()||0} | Alilipwa: ${o.costs?.pesa?.toLocaleString()||0}</div><div style="font-weight:900;color:#16a34a;margin-top:4px">Faida: ${o.costs?.faida?.toLocaleString()||0} TZS</div></div>`}</div>`).join('')}
-function openFinish(id){finishOrderId=id;const o=JSON.parse(localStorage.getItem('matari_orders_final')||'[]').find(x=>x.id===id);document.getElementById('finishName').innerText=o.jina+' - '+o.service;document.getElementById('finishModal').classList.add('active');['gUsafiri','gWasaidizi','gPesa'].forEach(i=>{document.getElementById(i).addEventListener('input',calcFaida)})}
-function calcFaida(){const u=parseInt(document.getElementById('gUsafiri').value)||0,w=parseInt(document.getElementById('gWasaidizi').value)||0,p=parseInt(document.getElementById('gPesa').value)||0,faida=p-(u+w);document.getElementById('faidaBox').style.display='block';document.getElementById('faidaVal').innerText=faida.toLocaleString()+' TZS';document.getElementById('faidaVal').style.color=faida>=0?'#16a34a':'#dc2626'}
-function saveFinish(){const u=parseInt(document.getElementById('gUsafiri').value)||0,w=parseInt(document.getElementById('gWasaidizi').value)||0,p=parseInt(document.getElementById('gPesa').value)||0;if(!p){alert('Jaza pesa uliyolipwa!');return}const faida=p-(u+w);let orders=JSON.parse(localStorage.getItem('matari_orders_final')||'[]');orders=orders.map(o=>o.id===finishOrderId?{...o,status:'done',costs:{usafiri:u,wasaidizi:w,pesa:p,faida},finishTime:new Date().toLocaleString()}:o);localStorage.setItem('matari_orders_final',JSON.stringify(orders));closeModal('finishModal');document.getElementById('gUsafiri').value='';document.getElementById('gWasaidizi').value='';document.getElementById('gPesa').value='';document.getElementById('faidaBox').style.display='none';loadOrders();loadReports();alert(`Kazi imemalizika! Faida: ${faida.toLocaleString()} TZS`)}
-function switchTab(id,el){document.getElementById('tabOrders').style.display=id==='tabOrders'?'block':'none';document.getElementById('tabReports').style.display=id==='tabReports'?'block':'none';document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');if(id==='tabReports')loadReports()}
-function loadReports(){const orders=JSON.parse(localStorage.getItem('matari_orders_final')||'[]'),done=orders.filter(o=>o.status==='done'),stats={};services.forEach(s=>stats[s.name]={count:0,qty:0,revenue:0,profit:0});orders.forEach(o=>{if(stats[o.service]){stats[o.service].count+=1;stats[o.service].qty+=o.qty||1;stats[o.service].revenue+=o.price||0;if(o.costs)stats[o.service].profit+=o.costs.faida||0}});document.getElementById('stats').innerHTML=Object.keys(stats).map(n=>{const s=stats[n],trend=s.count>2?'📈 Inapanda':'📉 Inashuka';return `<div style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)"><div style="font-size:11px;color:#64748b">${n}</div><div style="font-weight:900;margin-top:4px">Oda: ${s.count} | Idadi: ${s.qty}</div><div style="font-size:12px">Mapato: ${s.revenue.toLocaleString()} TZS</div><div style="font-size:12px;color:#16a34a;font-weight:800">Faida: ${s.profit.toLocaleString()} TZS</div><div style="font-size:11px;margin-top:4px">${trend}</div></div>`}).join('');const totalProfit=done.reduce((s,o)=>s+(o.costs?.faida||0),0),totalPesa=done.reduce((s,o)=>s+(o.costs?.pesa||0),0);document.getElementById('reportInfo').innerHTML=`<b>Jumla Oda:</b> ${orders.length} | <b>Zilizomalizika:</b> ${done.length} | <b>Mapato:</b> ${totalPesa.toLocaleString()} TZS | <b>Faida Jumla:</b> <span style="color:#16a34a;font-weight:900">${totalProfit.toLocaleString()} TZS</span>`;document.getElementById('profitList').innerHTML=done.slice().reverse().map(o=>`<div style="background:#fff;padding:10px;border-radius:10px;margin:6px 0;font-size:12px"><span>${o.time} - ${o.jina} - ${o.service} x${o.qty} - Usafiri ${o.costs.usafiri} + Wasaidizi ${o.costs.wasaidizi} = Gharama ${(o.costs.usafiri+o.costs.wasaidizi).toLocaleString()} | Alilipwa ${o.costs.pesa.toLocaleString()} | <b style="color:#16a34a">Faida ${o.costs.faida.toLocaleString()}</b></span></div>`).join('')}
-function genPDF(period){const {jsPDF}=window.jspdf,doc=new jsPDF(),orders=JSON.parse(localStorage.getItem('matari_orders_final')||'[]'),done=orders.filter(o=>o.status==='done'),now=new Date();doc.setFontSize(16);doc.text(`MATARI - Ripoti ya ${period==='wiki'?'Wiki':'Mwezi'} - Faida`,10,15);doc.setFontSize(10);doc.text(`Tarehe: ${now.toLocaleDateString()} | 0787571967`,10,22);let y=30;doc.text(`Jumla Oda: ${orders.length} | Zilizomalizika: ${done.length}`,10,y);y+=8;let totalPesa=done.reduce((s,o)=>s+(o.costs?.pesa||0),0),totalProfit=done.reduce((s,o)=>s+(o.costs?.faida||0),0),totalUsafiri=done.reduce((s,o)=>s+(o.costs?.usafiri||0),0),totalWasaidizi=done.reduce((s,o)=>s+(o.costs?.wasaidizi||0),0);doc.text(`Mapato: ${totalPesa.toLocaleString()} | Usafiri: ${totalUsafiri.toLocaleString()} | Wasaidizi: ${totalWasaidizi.toLocaleString()} | Faida: ${totalProfit.toLocaleString()} TZS`,10,y);y+=12;doc.text(`Maelezo:`,10,y);y+=8;done.slice(0,30).forEach(o=>{if(y>270){doc.addPage();y=10}doc.text(`${o.time} - ${o.jina} (${o.simu}) - ${o.service} x${o.qty} - Pesa:${o.costs.pesa} - Gharama:${o.costs.usafiri+o.costs.wasaidizi} - Faida:${o.costs.faida}`,10,y);y+=7});doc.save(`matari-faida-${period}-${now.toISOString().slice(0,10)}.pdf`)}
+let odas = JSON.parse(localStorage.getItem('matari_odas')||'[]');
+function save(){localStorage.setItem('matari_odas', JSON.stringify(odas))}
+function wekaOda(){
+let j=jina.value.trim(), s=simu.value.trim(), h=huduma.value, m=maelezo.value.trim(), mah=mahali.value.trim();
+if(!j||!s||h==='Chagua Huduma'){alert('Jaza jina, simu na huduma!');return}
+let oda={id:Date.now(),jina:j,simu:s,huduma:h,maelezo:m,mahali:mah,tarehe:new Date().toISOString(),status:'bado'};
+odas.unshift(oda);save();render();
+jina.value=simu.value=maelezo.value=mahali.value='';huduma.selectedIndex=0;
+alert('✅ Oda imepokelewa!');
+}
+function toggleDone(id){
+let o=odas.find(x=>x.id===id);if(o){o.status=o.status==='bado'?'imefanyika':'bado';save();render()}
+}
+function render(){
+let list=document.getElementById('odaList');
+if(odas.length===0){list.innerHTML='<small style="opacity:0.5">Hakuna oda bado...</small>';}
+else{
+list.innerHTML=odas.map(o=>{
+let t=new Date(o.tarehe);let d=t.toLocaleString('sw-TZ');
+let cls=o.status==='imefanyika'?'order-item done':'order-item';
+let btn=o.status==='bado'?`<button class="btn-pending" onclick="toggleDone(${o.id})">✅ Imefanyiwa Kazi?</button>`:`<button class="btn-done" onclick="toggleDone(${o.id})">✔️ Imefanyiwa</button>`;
+return `<div class="${cls}"><div><b>${o.jina}</b> - ${o.huduma}<br><small>${o.simu} | ${o.mahali}<br>${o.maelezo}<br>🕒 ${d} | <span style="color:${o.status==='bado'?'#ff4444':'#25D366'}">${o.status.toUpperCase()}</span></small></div><div>${btn}<br><a href="https://wa.me/${o.simu.replace(/[^0-9]/g,'')}" target="_blank" style="font-size:12px;color:var(--gold)">WhatsApp Mteja</a></div></div>`
+}).join('');
+}
+let now=new Date();
+let wikiC=odas.filter(o=>(now-new Date(o.tarehe))/86400000<=7).length;
+let mweziC=odas.filter(o=>{let d=new Date(o.tarehe);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()}).length;
+let mwakaC=odas.filter(o=>new Date(o.tarehe).getFullYear()===now.getFullYear()).length;
+let badoC=odas.filter(o=>o.status==='bado').length;
+document.getElementById('wiki').innerText=wikiC;
+document.getElementById('mwezi').innerText=mweziC;
+document.getElementById('mwaka').innerText=mwakaC;
+document.getElementById('bado').innerText=badoC;
+let bar=document.getElementById('alertBar');
+if(badoC>0){bar.style.display='block';bar.innerText=`⚠️ ODA ${badoC} HAIJAFANYIWA KAZI!`;}else bar.style.display='none';
+document.getElementById('c1').innerText=odas.length+512;
+document.getElementById('c2').innerText=odas.filter(o=>o.status==='imefanyika').length+340;
+let ctx=document.getElementById('chart');
+if(ctx){
+let months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+let data=months.map((_,i)=>odas.filter(o=>new Date(o.tarehe).getMonth()===i).length);
+new Chart(ctx,{type:'bar',data:{labels:months,datasets:[{label:'Oda kwa Mwezi',data:data,backgroundColor:'#FFC400'}]},options:{plugins:{legend:{display:false}}}});
+}
+}
+function safishaZote(){if(confirm('Futa oda zote?')){odas=[];save();render()}}
+function downloadReport(){
+let csv='Jina,Simu,Huduma,Mahali,Tarehe,Status\n'+odas.map(o=>`${o.jina},${o.simu},${o.huduma},${o.mahali},${o.tarehe},${o.status}`).join('\n');
+let blob=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='matari-ripoti.csv';a.click();
+}
+render();
+setInterval(render,30000);
 </script>
-</body></html>
+</body>
+</html>
