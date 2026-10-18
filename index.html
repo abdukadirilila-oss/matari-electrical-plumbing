@@ -1,205 +1,93 @@
-<!DOCTYPE html>
-<html lang="sw">
+!DOCTYPE html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUKU GUARD PRO MAX</title>
 <style>
-body{font-family:Arial;margin:0;background:#f5f7fb}
-.card{background:white;margin:12px;padding:16px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
-.btn{width:100%;padding:16px;border:none;border-radius:14px;font-size:18px;font-weight:bold;margin:8px 0}
-.btn-blue{background:#0d47a1;color:white}
-.btn-green{background:#2e7d32;color:white}
-.btn-red{background:#c62828;color:white}
-.btn-yellow{background:#f9a825;color:#000}
-.big-number{font-size:42px;font-weight:bold;color:white}
-.hidden{display:none}
-input,select{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #ccc}
-img{max-width:100%;border-radius:10px}
+body {
+  margin:0;
+  background:#050d25;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Courier New', monospace;
+}
+#text {
+  font-size:70px;
+  font-weight:900;
+  color:#ffcc00;
+  border-right:4px solid #ffcc00;
+  white-space:nowrap;
+  overflow:hidden;
+  text-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
+  letter-spacing:3px;
+}
+.cursor {
+  animation: blink 0.7s infinite;
+}
+@keyframes blink {
+  0%, 50% { border-color:#ffcc00 }
+  51%, 100% { border-color:transparent }
+}
+/* Background glow */
+body::before {
+  content:'';
+  position:absolute;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 70%);
+  animation: pulse 2s infinite alternate;
+}
+@keyframes pulse {
+  to { transform:scale(1.2); opacity:0.5 }
+}
 </style>
 </head>
 <body>
 
-<div id="loginPage" class="card" style="margin-top:40px;text-align:center">
-<h1 style="color:#0d47a1">⚡ LUKU GUARD<br>PRO MAX</h1>
-<p>Mfumo wa kumuokoa Mteja LUKU</p>
-<button class="btn btn-blue" onclick="showPage('mtejaPage')">👤 INGIA MTEJA</button>
-<button class="btn" style="background:#111;color:white" onclick="showPage('bossLoginPage')">🔐 INGIA BOSS</button>
-<p style="font-size:12px;margin-top:20px">Malipo: 2k/mwezi - Lipa: 0673092321</p>
-</div>
+<div id="text"></div>
 
-<div id="bossLoginPage" class="card hidden">
-<h2>Ingia Boss</h2>
-<input type="password" id="bossPass" placeholder="Password ya Boss (imefichwa •••••)">
-<button class="btn btn-blue" onclick="loginBoss()">INGIA</button>
-<button class="btn" onclick="showPage('loginPage')">RUDI</button>
-<p id="bossError" style="color:red"></p>
-</div>
-
-<div id="mtejaPage" class="hidden">
-<div class="card" style="background:#0d47a1;color:white">
-<h3>⚡ SALIO LA LUKU</h3>
-<label>Unit zilizobaki kwenye meter:</label>
-<input type="number" id="lukuUnit" placeholder="Mfano: 12.3" oninput="hesabuLuku()">
-<div id="lukuResult" style="margin-top:10px"></div>
-</div>
-
-<div class="card">
-<h3>Orodha ya Vifaa Vyako</h3>
-<input id="jinaKifaa" placeholder="Aina: Mfano AC / Fridge">
-<input id="kampuniKifaa" placeholder="Kampuni: Mfano LG / Samsung">
-<input id="modelKifaa" placeholder="Model: Mfano Dual Inverter">
-<input id="wattsKifaa" type="number" placeholder="Watts: Mfano 1200">
-<input type="file" id="pichaKifaa" accept="image/*" capture="environment">
-<button class="btn btn-yellow" onclick="ongezaKifaa()">+ ONGEZA KIFAA</button>
-<div id="orodhaVifaa"></div>
-</div>
-
-<div class="card" style="background:#fff8e1">
-<h3>💡 Ushauri wa Leo wa LUKU</h3>
-<div id="ushauriLuku">Andika LUKU na vifaa kwanza...</div>
-</div>
-
-<div class="card">
-<h3>🚨 Kifaa Kimeharibika?</h3>
-<input id="tatizo" placeholder="Mfano: AC inatoa harufu ya kutu">
-<button class="btn btn-blue" onclick="ripotiHitilafu()">PATA HATUA ZA AWALI</button>
-<div id="hatuaZaAwali" style="margin-top:10px"></div>
-<div id="buttonFundi" class="hidden">
-<button class="btn btn-green" onclick="ombaFundiGuard()">🔴 NAOMBA FUNDI WA LUKU GUARD</button>
-<button class="btn btn-blue" onclick="tumiaFundiWangu()">🟢 NITATUMIA FUNDI WANGU</button>
-</div>
-</div>
-<button class="btn" onclick="showPage('loginPage')">TOKA</button>
-</div>
-
-<div id="bossPage" class="hidden">
-<div class="card">
-<h2>Dashboard ya Abdukadiri</h2>
-<p>Wateja: <span id="totalWateja">0</span> | Mapato: <span id="totalMapato">0</span> TZS</p>
-<button class="btn btn-blue" onclick="pakuaPDF()">📥 PAKUA RIPOTI PDF + CHART</button>
-</div>
-<div class="card">
-<h3>Orodha ya Wateja Wote</h3>
-<div id="orodhaWatejaAdmin"></div>
-</div>
-<button class="btn" onclick="showPage('loginPage')">TOKA</button>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-let vifaa = JSON.parse(localStorage.getItem('vifaa')||'[]');
-let wateja = JSON.parse(localStorage.getItem('watejaData')||'[]');
-const PASS_BOSS = "amyra"; // Imehifadhiwa, haioneshwi kwenye UI
-const WHATSAPP_BOSS = "071377454";
-const LIPA_NAMBA = "0673092321";
+const sentences = [
+  "MATARI ELECTRICAL...",
+  "FUNDI WA UMEKE ⚡",
+  "BEI POA SANA 🔥",
+  "PIGA: 0787 571 967 📞"
+];
 
-function showPage(id){
- document.querySelectorAll('div[id$="Page"]').forEach(d=>d.classList.add('hidden'));
- document.getElementById(id).classList.remove('hidden');
- if(id==='bossPage') onyeshaAdmin();
- if(id==='mtejaPage') onyeshaVifaa();
+let sentenceIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const textEl = document.getElementById('text');
+
+function type() {
+  const current = sentences[sentenceIndex];
+  
+  if (!isDeleting) {
+    // Anaandika
+    textEl.innerText = current.substring(0, charIndex+1);
+    charIndex++;
+    
+    if (charIndex === current.length) {
+      // Kaandika wote, subiri kidogo halafu futa
+      setTimeout(()=>{ isDeleting = true; type(); }, 2000);
+      return;
+    }
+  } else {
+    // Anafuta
+    textEl.innerText = current.substring(0, charIndex-1);
+    charIndex--;
+    
+    if (charIndex === 0) {
+      isDeleting = false;
+      sentenceIndex = (sentenceIndex + 1) % sentences.length;
+    }
+  }
+  
+  let speed = isDeleting ? 40 : 100;
+  setTimeout(type, speed);
 }
 
-function loginBoss(){
- if(document.getElementById('bossPass').value===PASS_BOSS){
-   showPage('bossPage');
- }else{
-   document.getElementById('bossError').innerText="Password si sahihi!";
- }
-}
-
-function hesabuLuku(){
- let unit = parseFloat(document.getElementById('lukuUnit').value);
- if(!unit) return;
- let matumiziKwaSiku = vifaa.reduce((s,k)=>s+(k.watts*5/1000), 2.5); // makadirio
- let siku = (unit/matumiziKwaSiku).toFixed(1);
- document.getElementById('lukuResult').innerHTML=`<div class='big-number'>Unit ${unit}</div><p style='background:#f9a825;color:#000;padding:8px;border-radius:8px'>⚠️ Itaisha baada ya siku ${siku} - Saa 8 mchana!</p>`;
- document.getElementById('ushauriLuku').innerHTML=`AC yako ya LG ndio inakula ${(matumiziKwaSiku*0.6).toFixed(1)} Unit/siku (60% ya LUKU). Zima mchana, washa jioni tu utaokoa 6,000!`;
-}
-
-function ongezaKifaa(){
- let k={
-  jina:document.getElementById('jinaKifaa').value,
-  kampuni:document.getElementById('kampuniKifaa').value,
-  model:document.getElementById('modelKifaa').value,
-  watts:parseInt(document.getElementById('wattsKifaa').value)||0,
-  picha:'' 
- };
- let file = document.getElementById('pichaKifaa').files[0];
- if(file){
-   let reader = new FileReader();
-   reader.onload = function(e){ k.picha=e.target.result; vifaa.push(k); save(); }
-   reader.readAsDataURL(file);
- }else{
-   vifaa.push(k); save();
- }
- function save(){
-   localStorage.setItem('vifaa', JSON.stringify(vifaa));
-   let mtejaData = {jina:'Mteja', luku:document.getElementById('lukuUnit').value, vifaa:vifaa, tarehe:new Date().toLocaleDateString()};
-   wateja.push(mtejaData); localStorage.setItem('watejaData', JSON.stringify(wateja));
-   onyeshaVifaa(); hesabuLuku();
- }
-}
-
-function onyeshaVifaa(){
- let html='';
- vifaa.forEach((k,i)=>{
-  html+=`<div class='card'><b>${k.jina} - ${k.kampuni} ${k.watts}W</b><br>Model: ${k.model}${k.picha?`<br><img src='${k.picha}'>`:''}</div>`;
- });
- document.getElementById('orodhaVifaa').innerHTML=html;
-}
-
-function ripotiHitilafu(){
- let tatizo = document.getElementById('tatizo').value;
- let kifaa = vifaa[0]||{kampuni:'LG', model:'Dual'};
- document.getElementById('hatuaZaAwali').innerHTML=`<p><b>Hatua za awali kwa ${kifaa.kampuni} ${kifaa.model}:</b><br>1. Zima swichi kuu<br>2. Safisha firiza ya ${kifaa.model} - angalia picha uliyopiga<br>3. Subiri dakika 30 kisha washa tena.<br>Video ya ${kifaa.kampuni} model ${kifaa.model} inacheza offline.</p>`;
- document.getElementById('buttonFundi').classList.remove('hidden');
-}
-
-function ombaFundiGuard(){
- let tatizo = document.getElementById('tatizo').value;
- let msg = `🚨 OMBI LA FUNDI - LUKU GUARD%0AJina: Mteja%0AKifaa: ${vifaa[0]?.kampuni||''} ${vifaa[0]?.model||''}%0ATatizo: ${tatizo}%0ALUKU: Unit ${document.getElementById('lukuUnit').value}%0AMahali: Mbezi`;
- window.open(`https://wa.me/255${WHATSAPP_BOSS.substring(1)}?text=${msg}`, '_blank');
- alert('Asante! Alert imetumwa kwa Abdukadiri WhatsApp 071377454. Atakujibu haraka!');
- // Hifadhi changamoto
- let data = JSON.parse(localStorage.getItem('changamoto')||'[]');
- data.push({tatizo, tarehe:new Date().toLocaleString(), kifaa:vifaa[0]});
- localStorage.setItem('changamoto', JSON.stringify(data));
-}
-
-function tumiaFundiWangu(){
- alert('Sawa! Tumekupa PDF ya maelekezo ya '+ (vifaa[0]?.kampuni||'kifaa') +' '+ (vifaa[0]?.model||'') +'. Mpe fundi wako asome. Utaokoa LUKU!');
-}
-
-function onyeshaAdmin(){
- document.getElementById('totalWateja').innerText=wateja.length;
- document.getElementById('totalMapato').innerText=wateja.length*2000;
- let html='';
- wateja.forEach((w,i)=>{
-  html+=`<div class='card'><b>${w.jina} ${i+1}</b> - LUKU: ${w.luku} Unit<br>Vifaa: ${w.vifaa.map(v=>v.jina+' '+v.kampuni).join(', ')}<br>Tarehe: ${w.tarehe}</div>`;
- });
- let chang = JSON.parse(localStorage.getItem('changamoto')||'[]');
- if(chang.length){ html+=`<h4>Changamoto zote:</h4>`; chang.forEach(c=>{ html+=`<p>${c.tarehe} - ${c.kifaa?.kampuni} - ${c.tatizo}</p>` }) }
- document.getElementById('orodhaWatejaAdmin').innerHTML=html||'Hakuna wateja bado';
-}
-
-function pakuaPDF(){
- const {jsPDF}=window.jspdf;
- let doc=new jsPDF();
- doc.text("LUKU GUARD PRO MAX - Ripoti ya Abdukadiri",10,10);
- doc.text("Mwezi: Oktoba 2026",10,20);
- doc.text(`Wateja: ${wateja.length} - Mapato 2k: ${wateja.length*2000} TZS`,10,30);
- doc.text(`Namba ya Malipo: ${LIPA_NAMBA} - WhatsApp: ${WHATSAPP_BOSS}`,10,40);
- let y=50;
- wateja.forEach((w,i)=>{
-  doc.text(`${i+1}. ${w.jina} - LUKU ${w.luku} - Vifaa: ${w.vifaa.map(v=>v.jina).join(', ')}`,10,y); y+=10;
- });
- let chang=JSON.parse(localStorage.getItem('changamoto')||'[]');
- y+=10; doc.text("Changamoto:",10,y); y+=10;
- chang.forEach(c=>{ doc.text(`${c.tarehe} - ${c.kifaa?.kampuni} ${c.kifaa?.model} - ${c.tatizo}`,10,y); y+=10; });
- doc.save(`LUKU_GUARD_Ripoti_${new Date().toLocaleDateString()}.pdf`);
-}
+type();
 </script>
 </body>
 </html>
