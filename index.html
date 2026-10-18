@@ -1,93 +1,74 @@
-!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="sw">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matari Electrical Co. - Mbezi Dar</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-body {
-  margin:0;
-  background:#050d25;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:'Courier New', monospace;
-}
-#text {
-  font-size:70px;
-  font-weight:900;
-  color:#ffcc00;
-  border-right:4px solid #ffcc00;
-  white-space:nowrap;
-  overflow:hidden;
-  text-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
-  letter-spacing:3px;
-}
-.cursor {
-  animation: blink 0.7s infinite;
-}
-@keyframes blink {
-  0%, 50% { border-color:#ffcc00 }
-  51%, 100% { border-color:transparent }
-}
-/* Background glow */
-body::before {
-  content:'';
-  position:absolute;
-  width:600px;
-  height:600px;
-  background:radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 70%);
-  animation: pulse 2s infinite alternate;
-}
-@keyframes pulse {
-  to { transform:scale(1.2); opacity:0.5 }
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f7fb} header{background:#0d47a1;color:white;padding:12px 16px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:20}
+.card{background:white;margin:12px;padding:16px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;margin:6px 0;cursor:pointer}
+.btn-blue{background:#0d47a1;color:white} .btn-green{background:#2e7d32;color:white} .btn-yellow{background:#f9a825;color:black}
+.hidden{display:none} input,select,textarea{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #ccc}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.badge{padding:4px 8px;border-radius:8px;font-size:12px;color:white} .badge-new{background:#c62828} .badge-done{background:#2e7d32}
+.topAlert{background:#c62828;color:white;padding:10px;text-align:center;font-weight:bold}
 </style>
 </head>
 <body>
+<header><h3>⚡ MATARI ELECTRICAL CO.</h3><span>0673092321</span></header>
 
-<div id="text"></div>
+<div id="loginChoice" class="card" style="margin-top:30px;text-align:center">
+<h2>Karibu Matari Electrical Co.</h2><p>Umeme na Bomba - Mbezi Dar</p>
+<button class="btn btn-blue" onclick="show('mtejaLogin')">👤 INGIA MTEJA</button>
+<button class="btn" style="background:#111;color:white" onclick="show('fundiLogin')">🔧 INGIA MHUDUMU</button>
+</div>
+
+<div id="mtejaLogin" class="card hidden"><h3>Ingiza Taarifa Zako</h3><input id="mtejaJina" placeholder="Jina lako kamili"><input id="mtejaSimu" placeholder="Namba ya simu 071..."><button class="btn btn-blue" onclick="ingiaMteja()">ENDELEA</button><button class="btn" onclick="show('loginChoice')">RUDI</button></div>
+
+<div id="mtejaHuduma" class="hidden">
+<div class="card"><h3>Habari, <span id="mtejaJinaShow"></span>!</h3></div>
+<div class="grid">
+<div class="card"><h3>🔌 Electrical Installation</h3><p>Wiring, LUKU, Socket</p><b>Kuanzia 20k</b><button class="btn btn-yellow" onclick="chaguaHuduma('Electrical Installation','20000')">NAHITAJI HUDUMA</button></div>
+<div class="card" style="border:2px solid #f9a825"><h3>📷 Kufunga Kamera</h3><p>CCTV - Ulinzi</p><b>30k kwa kamera moja</b><button class="btn btn-yellow" onclick="chaguaHuduma('Kufunga Kamera - 30k','30000')">NAHITAJI HUDUMA</button></div>
+<div class="card" style="border:2px solid #0d47a1"><h3>❄️ AC - 70k</h3><p>LG, Samsung - Kufunga & Gesi</p><b>70k kwa AC moja</b><button class="btn btn-yellow" onclick="chaguaHuduma('AC - 70k','70000')">NAHITAJI HUDUMA</button></div>
+<div class="card"><h3>🚿 Plumbing</h3><p>Bomba, Pump, Choo</p><b>Kuanzia 15k</b><button class="btn btn-yellow" onclick="chaguaHuduma('Plumbing','15000')">NAHITAJI HUDUMA</button></div>
+</div>
+</div>
+
+<div id="mtejaMahali" class="card hidden"><h3>Jaza Mahali Ulipo</h3><p>Huduma: <b id="hudumaChaguliwaShow"></b></p><input id="mkoa" placeholder="Mkoa - Dar"><input id="wilaya" placeholder="Wilaya - Kinondoni"><input id="kata" placeholder="Kata - Mbezi"><input id="mtaa" placeholder="Mtaa"><textarea id="maelezo" placeholder="Maelezo"></textarea><p><b>Jumla: <span id="jumlaBei">0</span> TZS</b></p><button class="btn btn-green" onclick="submitOda()">SUBMIT ODA</button></div>
+
+<div id="mtejaAsante" class="card hidden" style="text-align:center"><h2>✅ Asante!</h2><p>Oda imepokelewa. Tutakupigia.</p><p>WhatsApp Admin: <b id="whatsappShow"></b></p><button class="btn btn-blue" onclick="location.reload()">RUDI</button></div>
+
+<div id="fundiLogin" class="card hidden"><h3>Ingia Mhudumu</h3><input type="password" id="passMhudumu" placeholder="Password adamu"><button class="btn btn-blue" onclick="loginMhudumu()">INGIA</button><button class="btn" onclick="show('loginChoice')">RUDI</button><p id="loginError" style="color:red"></p></div>
+
+<div id="mhudumuPage" class="hidden">
+<div id="alertBar" class="topAlert hidden"></div>
+<div class="card"><h2>Dashboard - Abdukadiri</h2><p>Oda: <span id="totalOda">0</span> | Mpya: <span id="odaNew">0</span> | Mapato: <span id="totalMapato">0</span></p><button class="btn btn-blue" onclick="pakuaRipoti()">📥 PAKUA RIPOTI PDF</button></div>
+<div class="card"><h3>📊 Graph</h3><div class="grid"><div><canvas id="chartWateja"></canvas></div><div><canvas id="chartHuduma"></canvas></div></div></div>
+<div class="card"><h3>Oda Zote</h3><div id="orodhaOda"></div></div>
+<div class="card"><h3>⚙️ Settings</h3><input id="setWhatsapp" placeholder="WhatsApp 071377454"><input id="setLipa" placeholder="Malipo 0673092321"><input type="password" id="setPassOld" placeholder="Password zamani"><input type="password" id="setPassNew" placeholder="Password mpya"><button class="btn btn-green" onclick="saveSettings()">HIFADHI</button></div>
+<button class="btn" onclick="show('loginChoice')">TOKA</button>
+</div>
 
 <script>
-const sentences = [
-  "MATARI ELECTRICAL...",
-  "FUNDI WA UMEKE ⚡",
-  "BEI POA SANA 🔥",
-  "PIGA: 0787 571 967 📞"
-];
-
-let sentenceIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const textEl = document.getElementById('text');
-
-function type() {
-  const current = sentences[sentenceIndex];
-  
-  if (!isDeleting) {
-    // Anaandika
-    textEl.innerText = current.substring(0, charIndex+1);
-    charIndex++;
-    
-    if (charIndex === current.length) {
-      // Kaandika wote, subiri kidogo halafu futa
-      setTimeout(()=>{ isDeleting = true; type(); }, 2000);
-      return;
-    }
-  } else {
-    // Anafuta
-    textEl.innerText = current.substring(0, charIndex-1);
-    charIndex--;
-    
-    if (charIndex === 0) {
-      isDeleting = false;
-      sentenceIndex = (sentenceIndex + 1) % sentences.length;
-    }
-  }
-  
-  let speed = isDeleting ? 40 : 100;
-  setTimeout(type, speed);
-}
-
-type();
+let orders=JSON.parse(localStorage.getItem('matari_orders')||'[]');
+let settings=JSON.parse(localStorage.getItem('matari_settings')||'{"whatsapp":"071377454","lipa":"0673092321","pass":"adamu"}');
+let currentMteja={},currentHuduma='',currentBei=0;
+function show(id){document.querySelectorAll('[id$="Login"],[id$="Choice"],[id$="Huduma"],[id$="Mahali"],[id$="Asante"],[id$="Page"]').forEach(e=>e.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='mhudumuPage')loadAdmin();}
+function ingiaMteja(){let j=document.getElementById('mtejaJina').value,s=document.getElementById('mtejaSimu').value;if(!j||!s){alert('Jaza jina na simu');return;}currentMteja={jina:j,simu:s};document.getElementById('mtejaJinaShow').innerText=j;show('mtejaHuduma');}
+function chaguaHuduma(h,b){currentHuduma=h;currentBei=parseInt(b);document.getElementById('hudumaChaguliwaShow').innerText=h;document.getElementById('jumlaBei').innerText=b;show('mtejaMahali');}
+function submitOda(){let m=document.getElementById('mkoa').value,w=document.getElementById('wilaya').value,k=document.getElementById('kata').value,mt=document.getElementById('mtaa').value;if(!m||!w||!k||!mt){alert('Jaza mkoa wilaya kata mtaa');return;}let oda={id:Date.now(),jina:currentMteja.jina,simu:currentMteja.simu,huduma:currentHuduma,bei:currentBei,mkoa:m,wilaya:w,kata:k,mtaa:mt,maelezo:document.getElementById('maelezo').value,tarehe:new Date().toLocaleString(),status:'new'};orders.push(oda);localStorage.setItem('matari_orders',JSON.stringify(orders));document.getElementById('whatsappShow').innerText=settings.whatsapp;let msg=`ODA MPYA MATARI%0AJina:${oda.jina}%0ASimu:${oda.simu}%0AHuduma:${oda.huduma} ${oda.bei}TZS%0AMahali:${m},${w},${k},${mt}%0ATarehe:${oda.tarehe}`;window.open(`https://wa.me/255${settings.whatsapp.substring(1)}?text=${msg}`,'_blank');show('mtejaAsante');}
+function loginMhudumu(){let p=document.getElementById('passMhudumu').value;if(p===settings.pass){show('mhudumuPage');}else{document.getElementById('loginError').innerText='Si sahihi, ni adamu';}}
+function loadAdmin(){document.getElementById('totalOda').innerText=orders.length;let ne=orders.filter(o=>o.status==='new').length;document.getElementById('odaNew').innerText=ne;document.getElementById('totalMapato').innerText=orders.reduce((s,o)=>s+o.bei,0);if(ne>0){document.getElementById('alertBar').classList.remove('hidden');document.getElementById('alertBar').innerText=`🚨 Oda ${ne} Mpya!`;}document.getElementById('setWhatsapp').value=settings.whatsapp;document.getElementById('setLipa').value=settings.lipa;let html='';orders.slice().reverse().forEach(o=>{html+=`<div class='card' style='border-left:5px solid ${o.status==='new'?'#c62828':'#2e7d32'}'><b>${o.jina}</b> - ${o.simu} <span class='badge ${o.status==='new'?'badge-new':'badge-done'}'>${o.status}</span><br>${o.huduma} - ${o.bei} TZS<br>${o.mkoa},${o.wilaya},${o.kata},${o.mtaa}<br>${o.tarehe}<br><button class='btn btn-green' onclick='markDone(${o.id})'>Imefanyika</button> <a href='https://wa.me/255${o.simu.substring(1)}' target='_blank'><button class='btn btn-blue'>WhatsApp</button></a></div>`;});document.getElementById('orodhaOda').innerHTML=html||'Hakuna oda';drawCharts();}
+function markDone(id){orders=orders.map(o=>o.id===id?{...o,status:'done'}:o);localStorage.setItem('matari_orders',JSON.stringify(orders));loadAdmin();}
+function drawCharts(){let ctx1=document.getElementById('chartWateja').getContext('2d');let labels=orders.map((_,i)=>`Oda ${i+1}`);let data=orders.map((_,i)=>i+1);if(window.chart1)window.chart1.destroy();window.chart1=new Chart(ctx1,{type:'line',data:{labels,datasets:[{label:'Ongezeko Wateja',data,borderColor:'#0d47a1',backgroundColor:'rgba(13,71,161,0.2)',fill:true}]}});let ctx2=document.getElementById('chartHuduma').getContext('2d');let counts={};orders.forEach(o=>{counts[o.huduma]=(counts[o.huduma]||0)+1});if(window.chart2)window.chart2.destroy();window.chart2=new Chart(ctx2,{type:'bar',data:{labels:Object.keys(counts),datasets:[{label:'Huduma Maarufu',data:Object.values(counts),backgroundColor:['#0d47a1','#f9a825','#2e7d32','#c62828']}]}});}
+function pakuaRipoti(){const{jsPDF}=window.jspdf;let doc=new jsPDF();doc.text("Matari Electrical Co. - Ripoti",10,10);doc.text(`WhatsApp ${settings.whatsapp} - Malipo ${settings.lipa}`,10,20);let y=30;orders.forEach((o,i)=>{doc.text(`${i+1}. ${o.jina} | ${o.simu} | ${o.huduma} ${o.bei} | ${o.mkoa} ${o.wilaya} | ${o.tarehe}`,10,y);y+=8;if(y>280){doc.addPage();y=10;}});doc.save(`Matari_Ripoti_${new Date().toLocaleDateString()}.pdf`);}
+function saveSettings(){let w=document.getElementById('setWhatsapp').value,l=document.getElementById('setLipa').value,oldP=document.getElementById('setPassOld').value,newP=document.getElementById('setPassNew').value;if(oldP&&oldP!==settings.pass){alert('Password zamani si sahihi');return;}if(w)settings.whatsapp=w;if(l)settings.lipa=l;if(newP)settings.pass=newP;localStorage.setItem('matari_settings',JSON.stringify(settings));alert('Imehifadhiwa!');}
 </script>
 </body>
 </html>
